@@ -1,0 +1,115 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CalendarEvent {
+  summary: String!
+  startsAt: Float!
+  endsAt: Float!
+}
+
+type CurrentPlaying {
+  previous: CurrentPlayingTrack!
+  current: CurrentPlayingTrack!
+  next: CurrentPlayingTrack!
+  live: Live!
+  timestamp: Float!
+  listenersCount: Float!
+}
+
+type CurrentPlayingTrack {
+  id: String!
+  name: String!
+  title: String!
+  artist: String!
+  startsAt: Float!
+  endsAt: Float!
+  duration: Float!
+  art: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Listeners {
+  current: Float!
+  unique: Float!
+  total: Float!
+}
+
+type Live {
+  isLive: Boolean!
+  streamerName: String!
+  broadcastStart: Float!
+}
+
+type Mount {
+  path: String!
+  default: Boolean!
+  id: Float!
+  name: String!
+  url: String!
+  bitrate: Float!
+  format: String!
+  listeners: Listeners!
+}
+
+type Mutation {
+  signIn(email: String!, password: String!): Token!
+  signUp(email: String!, username: String, password: String!): User!
+}
+
+type Playlists {
+  m3u: String!
+  pls: String!
+}
+
+type Query {
+  getCurrentUser: User!
+  getCurrentPlaying: CurrentPlaying
+  getCalendarEvents: [CalendarEvent!]!
+  getStation: Station!
+  getRecordings: [Recording!]!
+  getHello: String!
+}
+
+type Recording {
+  name: String!
+  img: String!
+  year: String!
+  desc: String!
+  size: Float!
+}
+
+type Station {
+  id: Float!
+  name: String!
+  shortcode: String!
+  description: String!
+  frontend: String!
+  backend: String!
+  listenUrl: String!
+  public: Boolean!
+  playlists: Playlists!
+  mounts: [Mount!]!
+}
+
+type Token {
+  id: Int!
+  value: String!
+  ownerId: Int!
+  createdAt: DateTime!
+  expiresAt: DateTime
+  usedAt: DateTime
+}
+
+type User {
+  id: Int!
+  email: String!
+  username: String
+  wasOnlineAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
