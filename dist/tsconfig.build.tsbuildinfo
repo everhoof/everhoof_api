@@ -6626,18 +6626,28 @@
         "affectsGlobalScope": false
       },
       "../src/modules/tracks/types/azuracast-nowplaying.ts": {
-        "version": "31b4b3a63d36d0bd4436c85597082f431a13665897a709b6276515bfa755fc24",
-        "signature": "c8020cd1e35383c44ccf590e0daef7cd9ec060f1437b7157a78f5c8900327e24",
+        "version": "888f9adb6b57d8da34d93c18aa271aa1bae3e854f44513614cd41761de11724b",
+        "signature": "9cdd3ac39d5dfd2d017eca89da598ce3195d5c3cffc3782b29949f5975eb18cf",
+        "affectsGlobalScope": false
+      },
+      "../src/modules/tracks/types/track.ts": {
+        "version": "2267b1c1c5885cffe99bfc2abd8d070057684af609137901072da167687d4984",
+        "signature": "6ad1c733375b9bc131f41f13b7cbe25a127372a870a9dd9242ef6fc1bb18a6d2",
+        "affectsGlobalScope": false
+      },
+      "../src/modules/tracks/types/history.ts": {
+        "version": "a475c20b9cca89e7d140dfae91b6bdd7509452791ad332ee609e6a184162a392",
+        "signature": "8a47453534d93db1eebcbdc4c97260b656ca10df5a11781d11fd790a64f55524",
         "affectsGlobalScope": false
       },
       "../src/modules/tracks/tracks.service.ts": {
-        "version": "506dddcc05f302382bd2606c0a889fa3aa2d2158ad6118ca27a2c5b9c5ce2edd",
-        "signature": "2d51a24681b40ad53c0c79be91a373d891b4cf57ee4c2d5e37a6b035049b22b7",
+        "version": "f3f76d00a9901a518ab33b54f14c880ff7df2d77067d2b4dfc67c74433ba15e2",
+        "signature": "038e535835c572b2928f857562aa8a7dfa59ea8cf2f1d629f301ce7c1a49eabb",
         "affectsGlobalScope": false
       },
       "../src/modules/tracks/tracks.resolver.ts": {
-        "version": "0ae13f7f5d67bf99f9e5e3bee5519ef34ba975529fa437bb3ffb1d291d868277",
-        "signature": "2aa68e7908f1f94e071cc8d0f6bd8c6f1a09e368037a66bd9347b7d6f5843c77",
+        "version": "bb89e8e3dda99bcc9e6e2cd7d443557c1b11af10c64def3c7aff327add798e74",
+        "signature": "d1d77131ddeb4355912486b65ccc95ae16700851fe3748e65bad1f42dcc3922c",
         "affectsGlobalScope": false
       },
       "../src/modules/tracks/tracks.module.ts": {
@@ -31905,7 +31915,8 @@
         "../node_modules/@types/node/util.d.ts",
         "../src/common/filters/http-exception.filter.ts",
         "../src/modules/tracks/tracks.service.ts",
-        "../src/modules/tracks/types/current-playing.ts"
+        "../src/modules/tracks/types/current-playing.ts",
+        "../src/modules/tracks/types/history.ts"
       ],
       "../src/modules/tracks/tracks.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -31919,7 +31930,8 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/got/dist/source/index.d.ts",
         "../src/modules/tracks/types/azuracast-nowplaying.ts",
-        "../src/modules/tracks/types/current-playing.ts"
+        "../src/modules/tracks/types/current-playing.ts",
+        "../src/modules/tracks/types/history.ts"
       ],
       "../src/modules/tracks/types/azuracast-nowplaying.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
@@ -31940,6 +31952,27 @@
         "../node_modules/@types/node/util.d.ts"
       ],
       "../src/modules/tracks/types/current-playing.ts": [
+        "../node_modules/@nestjs/graphql/index.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../src/modules/tracks/types/history.ts": [
+        "../node_modules/@nestjs/graphql/index.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../src/modules/tracks/types/track.ts"
+      ],
+      "../src/modules/tracks/types/track.ts": [
         "../node_modules/@nestjs/graphql/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -53894,10 +53927,15 @@
       ],
       "../src/modules/tracks/tracks.resolver.ts": [
         "../src/modules/tracks/tracks.service.ts",
-        "../src/modules/tracks/types/current-playing.ts"
+        "../src/modules/tracks/types/current-playing.ts",
+        "../src/modules/tracks/types/history.ts"
       ],
       "../src/modules/tracks/tracks.service.ts": [
-        "../src/modules/tracks/types/current-playing.ts"
+        "../src/modules/tracks/types/current-playing.ts",
+        "../src/modules/tracks/types/history.ts"
+      ],
+      "../src/modules/tracks/types/history.ts": [
+        "../src/modules/tracks/types/track.ts"
       ],
       "../src/modules/users/entities/users.entity.ts": [
         "../src/modules/accounts/entities/tokens.entity.ts",

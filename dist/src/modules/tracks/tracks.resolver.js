@@ -15,12 +15,16 @@ const common_1 = require("@nestjs/common");
 const http_exception_filter_1 = require("../../common/filters/http-exception.filter");
 const tracks_service_1 = require("./tracks.service");
 const current_playing_1 = require("./types/current-playing");
+const history_1 = require("./types/history");
 let TracksResolver = class TracksResolver {
     constructor(tracksService) {
         this.tracksService = tracksService;
     }
     getCurrentPlaying() {
         return this.tracksService.getCurrentPlaying();
+    }
+    getTracksHistory() {
+        return this.tracksService.getTracksHistory();
     }
 };
 __decorate([
@@ -29,6 +33,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], TracksResolver.prototype, "getCurrentPlaying", null);
+__decorate([
+    graphql_1.Query(() => [history_1.HistoryItem]),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], TracksResolver.prototype, "getTracksHistory", null);
 TracksResolver = __decorate([
     common_1.UseFilters(http_exception_filter_1.HttpExceptionFilter),
     graphql_1.Resolver('Tracks'),

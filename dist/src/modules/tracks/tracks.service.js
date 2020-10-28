@@ -18,8 +18,10 @@ const got_1 = __importDefault(require("got"));
 const current_playing_1 = require("./types/current-playing");
 const schedule_1 = require("@nestjs/schedule");
 const azuracast_nowplaying_1 = require("./types/azuracast-nowplaying");
+const history_1 = require("./types/history");
 let TracksService = class TracksService {
     constructor() {
+        this.tracksHistory = [];
         this.azuracastClient = got_1.default.extend({
             responseType: 'json',
             prefixUrl: `${process.env.AZURACAST_URL}/api/`,
@@ -30,46 +32,70 @@ let TracksService = class TracksService {
             await this.updateCurrentPlaying();
         return this.currentPlaying;
     }
+    async getTracksHistory() {
+        if (this.tracksHistory.length === 0)
+            await this.updateCurrentPlaying();
+        return this.tracksHistory;
+    }
     async updateCurrentPlaying() {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
         const currentPlaying = new current_playing_1.CurrentPlaying();
         try {
             const response = await this.azuracastClient(`nowplaying/${process.env.AZURACAST_STATION_ID}`).json();
-            let id = ((_a = response === null || response === void 0 ? void 0 : response.now_playing) === null || _a === void 0 ? void 0 : _a.song.id) || '';
-            let title = ((_b = response === null || response === void 0 ? void 0 : response.now_playing) === null || _b === void 0 ? void 0 : _b.song.title) || '';
-            let artist = ((_c = response === null || response === void 0 ? void 0 : response.now_playing) === null || _c === void 0 ? void 0 : _c.song.artist) || '';
-            let name = ((_d = response === null || response === void 0 ? void 0 : response.now_playing) === null || _d === void 0 ? void 0 : _d.song.text) || '';
-            let duration = ((_e = response === null || response === void 0 ? void 0 : response.now_playing) === null || _e === void 0 ? void 0 : _e.duration) || 0;
-            let startsAt = (((_f = response === null || response === void 0 ? void 0 : response.now_playing) === null || _f === void 0 ? void 0 : _f.played_at) || 0) * 1000 || Date.now();
+            if (!response)
+                return;
+            let id = ((_a = response.now_playing) === null || _a === void 0 ? void 0 : _a.song.id) || '';
+            let title = ((_b = response.now_playing) === null || _b === void 0 ? void 0 : _b.song.title) || '';
+            let artist = ((_c = response.now_playing) === null || _c === void 0 ? void 0 : _c.song.artist) || '';
+            let name = ((_d = response.now_playing) === null || _d === void 0 ? void 0 : _d.song.text) || '';
+            let duration = ((_e = response.now_playing) === null || _e === void 0 ? void 0 : _e.duration) || 0;
+            let startsAt = (((_f = response.now_playing) === null || _f === void 0 ? void 0 : _f.played_at) || 0) * 1000 || Date.now();
             let endsAt = startsAt + duration * 1000;
-            let art = ((_g = response === null || response === void 0 ? void 0 : response.now_playing) === null || _g === void 0 ? void 0 : _g.song.art) || '';
+            let art = ((_g = response.now_playing) === null || _g === void 0 ? void 0 : _g.song.art) || '';
             currentPlaying.current = { id, title, artist, name, duration, startsAt, endsAt, art };
-            id = ((_h = response === null || response === void 0 ? void 0 : response.playing_next) === null || _h === void 0 ? void 0 : _h.song.id) || '';
-            title = ((_j = response === null || response === void 0 ? void 0 : response.playing_next) === null || _j === void 0 ? void 0 : _j.song.title) || '';
-            artist = ((_k = response === null || response === void 0 ? void 0 : response.playing_next) === null || _k === void 0 ? void 0 : _k.song.artist) || '';
-            name = ((_l = response === null || response === void 0 ? void 0 : response.playing_next) === null || _l === void 0 ? void 0 : _l.song.text) || '';
-            duration = ((_m = response === null || response === void 0 ? void 0 : response.playing_next) === null || _m === void 0 ? void 0 : _m.duration) || 0;
-            startsAt = (((_o = response === null || response === void 0 ? void 0 : response.playing_next) === null || _o === void 0 ? void 0 : _o.cued_at) || 0) * 1000 || Date.now();
+            id = ((_h = response.playing_next) === null || _h === void 0 ? void 0 : _h.song.id) || '';
+            title = ((_j = response.playing_next) === null || _j === void 0 ? void 0 : _j.song.title) || '';
+            artist = ((_k = response.playing_next) === null || _k === void 0 ? void 0 : _k.song.artist) || '';
+            name = ((_l = response.playing_next) === null || _l === void 0 ? void 0 : _l.song.text) || '';
+            duration = ((_m = response.playing_next) === null || _m === void 0 ? void 0 : _m.duration) || 0;
+            startsAt = (((_o = response.playing_next) === null || _o === void 0 ? void 0 : _o.cued_at) || 0) * 1000 || Date.now();
             endsAt = startsAt + duration * 1000;
-            art = ((_p = response === null || response === void 0 ? void 0 : response.playing_next) === null || _p === void 0 ? void 0 : _p.song.art) || '';
+            art = ((_p = response.playing_next) === null || _p === void 0 ? void 0 : _p.song.art) || '';
             currentPlaying.next = { id, title, artist, name, duration, startsAt, endsAt, art };
-            id = (response === null || response === void 0 ? void 0 : response.song_history[0].song.id) || '';
-            title = (response === null || response === void 0 ? void 0 : response.song_history[0].song.title) || '';
-            artist = (response === null || response === void 0 ? void 0 : response.song_history[0].song.artist) || '';
-            name = (response === null || response === void 0 ? void 0 : response.song_history[0].song.text) || '';
-            duration = (response === null || response === void 0 ? void 0 : response.song_history[0].duration) || 0;
-            startsAt = ((response === null || response === void 0 ? void 0 : response.song_history[0].played_at) || 0) * 1000 || Date.now();
+            id = response.song_history[0].song.id || '';
+            title = response.song_history[0].song.title || '';
+            artist = response.song_history[0].song.artist || '';
+            name = response.song_history[0].song.text || '';
+            duration = response.song_history[0].duration || 0;
+            startsAt = (response.song_history[0].played_at || 0) * 1000 || Date.now();
             endsAt = startsAt + duration * 1000;
-            art = (response === null || response === void 0 ? void 0 : response.song_history[0].song.art) || '';
+            art = response.song_history[0].song.art || '';
             currentPlaying.previous = { id, title, artist, name, duration, startsAt, endsAt, art };
             currentPlaying.live = {
-                isLive: ((_q = response === null || response === void 0 ? void 0 : response.live) === null || _q === void 0 ? void 0 : _q.is_live) || false,
-                streamerName: ((_r = response === null || response === void 0 ? void 0 : response.live) === null || _r === void 0 ? void 0 : _r.streamer_name) || '',
-                broadcastStart: ((_s = response === null || response === void 0 ? void 0 : response.live) === null || _s === void 0 ? void 0 : _s.broadcast_start) || 0,
+                isLive: ((_q = response.live) === null || _q === void 0 ? void 0 : _q.is_live) || false,
+                streamerName: ((_r = response.live) === null || _r === void 0 ? void 0 : _r.streamer_name) || '',
+                broadcastStart: ((_s = response.live) === null || _s === void 0 ? void 0 : _s.broadcast_start) || 0,
             };
             currentPlaying.timestamp = Date.now();
-            currentPlaying.listenersCount = ((_t = response === null || response === void 0 ? void 0 : response.listeners) === null || _t === void 0 ? void 0 : _t.unique) || 0;
+            currentPlaying.listenersCount = ((_t = response.listeners) === null || _t === void 0 ? void 0 : _t.unique) || 0;
             this.currentPlaying = currentPlaying;
+            this.tracksHistory = response.song_history.map((item) => ({
+                id: item.sh_id,
+                playedAt: item.played_at,
+                duration: item.duration,
+                playlist: item.playlist,
+                streamer: item.streamer,
+                isRequest: item.is_request,
+                track: {
+                    id: item.song.id,
+                    text: item.song.text,
+                    artist: item.song.title,
+                    title: item.song.title,
+                    album: item.song.album,
+                    lyrics: item.song.lyrics,
+                    art: item.song.art,
+                },
+            }));
         }
         catch (e) {
             console.error(e);
