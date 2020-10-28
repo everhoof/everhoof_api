@@ -42,7 +42,7 @@ export interface Song {
   album: string;
   lyrics: string;
   art: string;
-  custom_fields: any[];
+  custom_fields: Record<string, string>[];
 }
 
 export interface NowPlaying {

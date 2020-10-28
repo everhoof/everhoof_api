@@ -33,6 +33,16 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type HistoryItem {
+  id: Float!
+  playedAt: Float!
+  duration: Float!
+  playlist: String!
+  streamer: String!
+  isRequest: Boolean!
+  track: Track!
+}
+
 type Listeners {
   current: Float!
   unique: Float!
@@ -69,6 +79,7 @@ type Playlists {
 type Query {
   getCurrentUser: User!
   getCurrentPlaying: CurrentPlaying
+  getTracksHistory: [HistoryItem!]!
   getCalendarEvents: [CalendarEvent!]!
   getStation: Station!
   getRecordings: [Recording!]!
@@ -103,6 +114,16 @@ type Token {
   createdAt: DateTime!
   expiresAt: DateTime
   usedAt: DateTime
+}
+
+type Track {
+  id: String!
+  text: String!
+  artist: String!
+  title: String!
+  album: String!
+  lyrics: String!
+  art: String!
 }
 
 type User {
