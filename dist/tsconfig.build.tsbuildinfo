@@ -6651,7 +6651,7 @@
         "affectsGlobalScope": false
       },
       "../src/modules/tracks/args/track-search.args.ts": {
-        "version": "71a94afccdfd3546b8359c1e5d4b1cc20930fe2c91edf6a25d78985364a3a471",
+        "version": "25cb0049cb6e2719de0704793b6bb96a7da2a21beec25fba82eb2b1ec8a86e43",
         "signature": "b233e550e629f9a60305119bb4632f77775e7e3db3027a738175d1ff3a55728f",
         "affectsGlobalScope": false
       },

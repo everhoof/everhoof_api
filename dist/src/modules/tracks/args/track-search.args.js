@@ -22,7 +22,7 @@ __decorate([
     __metadata("design:type", Number)
 ], TrackSearchArgs.prototype, "count", void 0);
 __decorate([
-    graphql_1.Field(() => String),
+    graphql_1.Field(() => String, { defaultValue: '' }),
     __metadata("design:type", String)
 ], TrackSearchArgs.prototype, "q", void 0);
 TrackSearchArgs = __decorate([
