@@ -8,6 +8,6 @@ export class TrackSearchArgs {
   @Field(() => Int, { defaultValue: 10 })
   count: number;
 
-  @Field(() => String)
+  @Field(() => String, { defaultValue: '' })
   q: string;
 }
