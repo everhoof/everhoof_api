@@ -4,6 +4,9 @@ import { CurrentPlaying } from '@modules/tracks/types/current-playing';
 import { Interval } from '@nestjs/schedule';
 import { AzuracastNowPlaying } from '@modules/tracks/types/azuracast-nowplaying';
 import { HistoryItem } from '@modules/tracks/types/history';
+import { AzuracastRequests } from '@modules/tracks/types/azuracast-requests';
+import { TrackSearchResponse } from '@modules/tracks/types/track-search-response';
+import { TrackSearchArgs } from '@modules/tracks/args/track-search.args';
 
 @Injectable()
 export class TracksService {
@@ -26,6 +29,38 @@ export class TracksService {
   async getTracksHistory(): Promise<HistoryItem[]> {
     if (this.tracksHistory.length === 0) await this.updateCurrentPlaying();
     return this.tracksHistory;
+  }
+
+  async searchTracks(trackSearchArgs: TrackSearchArgs): Promise<TrackSearchResponse> {
+    const response = await this.azuracastClient(`station/${process.env.AZURACAST_STATION_ID}/requests`, {
+      searchParams: {
+        current: trackSearchArgs.page,
+        rowCount: trackSearchArgs.count,
+        searchPhrase: trackSearchArgs.q,
+      },
+    }).json<AzuracastRequests>();
+    if (!response)
+      return {
+        page: 1,
+        count: 0,
+        total: 0,
+        tracks: [],
+      };
+
+    return {
+      page: response.current,
+      count: response.rowCount,
+      total: response.total,
+      tracks: response.rows.map((track) => ({
+        id: track.song_id,
+        title: track.song_title,
+        artist: track.song_artist,
+        album: track.song_album,
+        art: track.song_art,
+        lyrics: track.song_lyrics,
+        text: track.song_text,
+      })),
+    };
   }
 
   @Interval(5000)

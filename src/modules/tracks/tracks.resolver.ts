@@ -1,9 +1,11 @@
-import { Query, Resolver } from '@nestjs/graphql';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 import { UseFilters } from '@nestjs/common';
 import { HttpExceptionFilter } from '@common/filters/http-exception.filter';
 import { TracksService } from '@modules/tracks/tracks.service';
 import { CurrentPlaying } from '@modules/tracks/types/current-playing';
 import { HistoryItem } from '@modules/tracks/types/history';
+import { TrackSearchResponse } from '@modules/tracks/types/track-search-response';
+import { TrackSearchArgs } from '@modules/tracks/args/track-search.args';
 
 @UseFilters(HttpExceptionFilter)
 @Resolver('Tracks')
@@ -18,5 +20,10 @@ export class TracksResolver {
   @Query(() => [HistoryItem])
   getTracksHistory(): Promise<HistoryItem[]> {
     return this.tracksService.getTracksHistory();
+  }
+
+  @Query(() => TrackSearchResponse)
+  searchTracks(@Args() trackSearchArgs: TrackSearchArgs): Promise<TrackSearchResponse> {
+    return this.tracksService.searchTracks(trackSearchArgs);
   }
 }

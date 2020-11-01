@@ -80,6 +80,7 @@ type Query {
   getCurrentUser: User!
   getCurrentPlaying: CurrentPlaying
   getTracksHistory: [HistoryItem!]!
+  searchTracks(page: Int = 1, count: Int = 10, q: String!): TrackSearchResponse!
   getCalendarEvents: [CalendarEvent!]!
   getStation: Station!
   getRecordings: [Recording!]!
@@ -124,6 +125,13 @@ type Track {
   album: String!
   lyrics: String!
   art: String!
+}
+
+type TrackSearchResponse {
+  page: Int!
+  count: Int!
+  total: Int!
+  tracks: [Track!]!
 }
 
 type User {
