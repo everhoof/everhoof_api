@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TracksResolver = void 0;
 const graphql_1 = require("@nestjs/graphql");
@@ -16,6 +19,10 @@ const http_exception_filter_1 = require("../../common/filters/http-exception.fil
 const tracks_service_1 = require("./tracks.service");
 const current_playing_1 = require("./types/current-playing");
 const history_1 = require("./types/history");
+const track_search_response_1 = require("./types/track-search-response");
+const track_search_args_1 = require("./args/track-search.args");
+const track_request_args_1 = require("./args/track-request.args");
+const track_request_response_1 = require("./types/track-request-response");
 let TracksResolver = class TracksResolver {
     constructor(tracksService) {
         this.tracksService = tracksService;
@@ -25,6 +32,12 @@ let TracksResolver = class TracksResolver {
     }
     getTracksHistory() {
         return this.tracksService.getTracksHistory();
+    }
+    searchTracks(trackSearchArgs) {
+        return this.tracksService.searchTracks(trackSearchArgs);
+    }
+    requestTrack(args) {
+        return this.tracksService.requestTrack(args);
     }
 };
 __decorate([
@@ -39,6 +52,20 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], TracksResolver.prototype, "getTracksHistory", null);
+__decorate([
+    graphql_1.Query(() => track_search_response_1.TrackSearchResponse),
+    __param(0, graphql_1.Args()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [track_search_args_1.TrackSearchArgs]),
+    __metadata("design:returntype", Promise)
+], TracksResolver.prototype, "searchTracks", null);
+__decorate([
+    graphql_1.Query(() => track_request_response_1.TrackRequestResponse),
+    __param(0, graphql_1.Args()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [track_request_args_1.TrackRequestArgs]),
+    __metadata("design:returntype", Promise)
+], TracksResolver.prototype, "requestTrack", null);
 TracksResolver = __decorate([
     common_1.UseFilters(http_exception_filter_1.HttpExceptionFilter),
     graphql_1.Resolver('Tracks'),

@@ -19,6 +19,11 @@ const current_playing_1 = require("./types/current-playing");
 const schedule_1 = require("@nestjs/schedule");
 const azuracast_nowplaying_1 = require("./types/azuracast-nowplaying");
 const history_1 = require("./types/history");
+const azuracast_requests_1 = require("./types/azuracast-requests");
+const track_search_response_1 = require("./types/track-search-response");
+const track_search_args_1 = require("./args/track-search.args");
+const track_request_args_1 = require("./args/track-request.args");
+const track_request_response_1 = require("./types/track-request-response");
 let TracksService = class TracksService {
     constructor() {
         this.tracksHistory = [];
@@ -36,6 +41,54 @@ let TracksService = class TracksService {
         if (this.tracksHistory.length === 0)
             await this.updateCurrentPlaying();
         return this.tracksHistory;
+    }
+    async searchTracks(trackSearchArgs) {
+        const response = await this.azuracastClient(`station/${process.env.AZURACAST_STATION_ID}/requests`, {
+            searchParams: {
+                current: trackSearchArgs.page,
+                rowCount: trackSearchArgs.count,
+                searchPhrase: trackSearchArgs.q,
+            },
+        }).json();
+        if (!response)
+            return {
+                page: 1,
+                count: 0,
+                total: 0,
+                items: [],
+            };
+        return {
+            page: response.current,
+            count: response.rowCount,
+            total: response.total,
+            items: response.rows.map((track) => ({
+                requestId: track.request_id,
+                track: {
+                    id: track.song_id,
+                    title: track.song_title,
+                    artist: track.song_artist,
+                    album: track.song_album,
+                    art: track.song_art,
+                    lyrics: track.song_lyrics,
+                    text: track.song_text,
+                },
+            })),
+        };
+    }
+    async requestTrack(args) {
+        try {
+            const response = await this.azuracastClient(`station/${process.env.AZURACAST_STATION_ID}/request/${args.songId}`).json();
+            return {
+                success: response.success,
+                message: response.message,
+            };
+        }
+        catch (e) {
+            return {
+                success: e.response.body.success,
+                message: e.response.body.message,
+            };
+        }
     }
     async updateCurrentPlaying() {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;

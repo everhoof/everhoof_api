@@ -6640,14 +6640,39 @@
         "signature": "8a47453534d93db1eebcbdc4c97260b656ca10df5a11781d11fd790a64f55524",
         "affectsGlobalScope": false
       },
+      "../src/modules/tracks/types/azuracast-requests.ts": {
+        "version": "23025202e6f10f23ac79353f38db3cddf5a0db9a3401cbab63713f58e953a0ae",
+        "signature": "fcb8d85c41b6b091e7c2d5e6520c34b7a66a0c9fc474f039ace03512c9cad275",
+        "affectsGlobalScope": false
+      },
+      "../src/modules/tracks/types/track-search-response.ts": {
+        "version": "f2fc440c8e7ce0c09a99bce051737d3c91b6c3eaa3e1d35c52cc4a79880fe12b",
+        "signature": "fc7b46855070dc4d8257b6c6cdff37f3669a57a0c02e9394371c787aff25e0cf",
+        "affectsGlobalScope": false
+      },
+      "../src/modules/tracks/args/track-search.args.ts": {
+        "version": "71a94afccdfd3546b8359c1e5d4b1cc20930fe2c91edf6a25d78985364a3a471",
+        "signature": "b233e550e629f9a60305119bb4632f77775e7e3db3027a738175d1ff3a55728f",
+        "affectsGlobalScope": false
+      },
+      "../src/modules/tracks/args/track-request.args.ts": {
+        "version": "4f9cda8cc0d519cef4c268de586546dea45c709637bab380cd4ab054fc1bd3bb",
+        "signature": "5cf5b9fb9e04a9ea14a48a37ea1ac65bb11a1a3be465d57293df604c38c4f3a8",
+        "affectsGlobalScope": false
+      },
+      "../src/modules/tracks/types/track-request-response.ts": {
+        "version": "512db4c34a556b7491ba0af44dad2bd5b9394a867dd884ec9ee7ac6fe460a359",
+        "signature": "289ab2ba538b2dad5e69c5336824ceb61f6eead7d869b4bf4701238bf01add52",
+        "affectsGlobalScope": false
+      },
       "../src/modules/tracks/tracks.service.ts": {
-        "version": "f3f76d00a9901a518ab33b54f14c880ff7df2d77067d2b4dfc67c74433ba15e2",
-        "signature": "038e535835c572b2928f857562aa8a7dfa59ea8cf2f1d629f301ce7c1a49eabb",
+        "version": "ba15e45a6f514ea0e5fcade3cf6860d2fc01775c19feaba8de86e2d128a48b46",
+        "signature": "9aac2c58e1862d849f91d22157335921f140823bed032d2f43548813aca28e26",
         "affectsGlobalScope": false
       },
       "../src/modules/tracks/tracks.resolver.ts": {
-        "version": "bb89e8e3dda99bcc9e6e2cd7d443557c1b11af10c64def3c7aff327add798e74",
-        "signature": "d1d77131ddeb4355912486b65ccc95ae16700851fe3748e65bad1f42dcc3922c",
+        "version": "9c0bc006dc5712592e3353caca0b41434de8063e42b3153b8123b38db17deece",
+        "signature": "a2962c5c93a69a7aea79d699ffce75424ad74d73a2ed7800a666d33cc766edd3",
         "affectsGlobalScope": false
       },
       "../src/modules/tracks/tracks.module.ts": {
@@ -31891,6 +31916,26 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts"
       ],
+      "../src/modules/tracks/args/track-request.args.ts": [
+        "../node_modules/@nestjs/graphql/index.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../src/modules/tracks/args/track-search.args.ts": [
+        "../node_modules/@nestjs/graphql/index.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts"
+      ],
       "../src/modules/tracks/tracks.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
@@ -31914,9 +31959,13 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../src/common/filters/http-exception.filter.ts",
+        "../src/modules/tracks/args/track-request.args.ts",
+        "../src/modules/tracks/args/track-search.args.ts",
         "../src/modules/tracks/tracks.service.ts",
         "../src/modules/tracks/types/current-playing.ts",
-        "../src/modules/tracks/types/history.ts"
+        "../src/modules/tracks/types/history.ts",
+        "../src/modules/tracks/types/track-request-response.ts",
+        "../src/modules/tracks/types/track-search-response.ts"
       ],
       "../src/modules/tracks/tracks.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -31929,11 +31978,25 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/got/dist/source/index.d.ts",
+        "../src/modules/tracks/args/track-request.args.ts",
+        "../src/modules/tracks/args/track-search.args.ts",
         "../src/modules/tracks/types/azuracast-nowplaying.ts",
+        "../src/modules/tracks/types/azuracast-requests.ts",
         "../src/modules/tracks/types/current-playing.ts",
-        "../src/modules/tracks/types/history.ts"
+        "../src/modules/tracks/types/history.ts",
+        "../src/modules/tracks/types/track-request-response.ts",
+        "../src/modules/tracks/types/track-search-response.ts"
       ],
       "../src/modules/tracks/types/azuracast-nowplaying.ts": [
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../src/modules/tracks/types/azuracast-requests.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/process.d.ts",
@@ -31962,6 +32025,27 @@
         "../node_modules/@types/node/util.d.ts"
       ],
       "../src/modules/tracks/types/history.ts": [
+        "../node_modules/@nestjs/graphql/index.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../src/modules/tracks/types/track.ts"
+      ],
+      "../src/modules/tracks/types/track-request-response.ts": [
+        "../node_modules/@nestjs/graphql/index.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../src/modules/tracks/types/track-search-response.ts": [
         "../node_modules/@nestjs/graphql/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -53926,15 +54010,26 @@
         "../src/modules/station/types/station.ts"
       ],
       "../src/modules/tracks/tracks.resolver.ts": [
+        "../src/modules/tracks/args/track-request.args.ts",
+        "../src/modules/tracks/args/track-search.args.ts",
         "../src/modules/tracks/tracks.service.ts",
         "../src/modules/tracks/types/current-playing.ts",
-        "../src/modules/tracks/types/history.ts"
+        "../src/modules/tracks/types/history.ts",
+        "../src/modules/tracks/types/track-request-response.ts",
+        "../src/modules/tracks/types/track-search-response.ts"
       ],
       "../src/modules/tracks/tracks.service.ts": [
+        "../src/modules/tracks/args/track-request.args.ts",
+        "../src/modules/tracks/args/track-search.args.ts",
         "../src/modules/tracks/types/current-playing.ts",
-        "../src/modules/tracks/types/history.ts"
+        "../src/modules/tracks/types/history.ts",
+        "../src/modules/tracks/types/track-request-response.ts",
+        "../src/modules/tracks/types/track-search-response.ts"
       ],
       "../src/modules/tracks/types/history.ts": [
+        "../src/modules/tracks/types/track.ts"
+      ],
+      "../src/modules/tracks/types/track-search-response.ts": [
         "../src/modules/tracks/types/track.ts"
       ],
       "../src/modules/users/entities/users.entity.ts": [
