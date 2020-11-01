@@ -4,9 +4,11 @@ import { CurrentPlaying } from '@modules/tracks/types/current-playing';
 import { Interval } from '@nestjs/schedule';
 import { AzuracastNowPlaying } from '@modules/tracks/types/azuracast-nowplaying';
 import { HistoryItem } from '@modules/tracks/types/history';
-import { AzuracastRequests } from '@modules/tracks/types/azuracast-requests';
+import { AzuracastRequestResponse, AzuracastRequests } from '@modules/tracks/types/azuracast-requests';
 import { TrackSearchResponse } from '@modules/tracks/types/track-search-response';
 import { TrackSearchArgs } from '@modules/tracks/args/track-search.args';
+import { TrackRequestArgs } from '@modules/tracks/args/track-request.args';
+import { TrackRequestResponse } from '@modules/tracks/types/track-request-response';
 
 @Injectable()
 export class TracksService {
@@ -44,23 +46,44 @@ export class TracksService {
         page: 1,
         count: 0,
         total: 0,
-        tracks: [],
+        items: [],
       };
 
     return {
       page: response.current,
       count: response.rowCount,
       total: response.total,
-      tracks: response.rows.map((track) => ({
-        id: track.song_id,
-        title: track.song_title,
-        artist: track.song_artist,
-        album: track.song_album,
-        art: track.song_art,
-        lyrics: track.song_lyrics,
-        text: track.song_text,
+      items: response.rows.map((track) => ({
+        requestId: track.request_id,
+        track: {
+          id: track.song_id,
+          title: track.song_title,
+          artist: track.song_artist,
+          album: track.song_album,
+          art: track.song_art,
+          lyrics: track.song_lyrics,
+          text: track.song_text,
+        },
       })),
     };
+  }
+
+  async requestTrack(args: TrackRequestArgs): Promise<TrackRequestResponse> {
+    try {
+      const response = await this.azuracastClient(
+        `station/${process.env.AZURACAST_STATION_ID}/request/${args.songId}`,
+      ).json<AzuracastRequestResponse>();
+
+      return {
+        success: response.success,
+        message: response.message,
+      };
+    } catch (e) {
+      return {
+        success: e.response.body.success,
+        message: e.response.body.message,
+      };
+    }
   }
 
   @Interval(5000)

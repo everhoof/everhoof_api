@@ -17,3 +17,11 @@ export interface AzuracastRequests {
   total: number;
   rows: AzuracastRequest[];
 }
+
+export interface AzuracastRequestResponse {
+  code?: number;
+  message: string;
+  formatted_message: string;
+  extra_data: string[];
+  success: boolean;
+}

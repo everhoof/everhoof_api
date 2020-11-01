@@ -6,6 +6,8 @@ import { CurrentPlaying } from '@modules/tracks/types/current-playing';
 import { HistoryItem } from '@modules/tracks/types/history';
 import { TrackSearchResponse } from '@modules/tracks/types/track-search-response';
 import { TrackSearchArgs } from '@modules/tracks/args/track-search.args';
+import { TrackRequestArgs } from '@modules/tracks/args/track-request.args';
+import { TrackRequestResponse } from '@modules/tracks/types/track-request-response';
 
 @UseFilters(HttpExceptionFilter)
 @Resolver('Tracks')
@@ -25,5 +27,10 @@ export class TracksResolver {
   @Query(() => TrackSearchResponse)
   searchTracks(@Args() trackSearchArgs: TrackSearchArgs): Promise<TrackSearchResponse> {
     return this.tracksService.searchTracks(trackSearchArgs);
+  }
+
+  @Query(() => TrackRequestResponse)
+  requestTrack(@Args() args: TrackRequestArgs): Promise<TrackRequestResponse> {
+    return this.tracksService.requestTrack(args);
   }
 }
