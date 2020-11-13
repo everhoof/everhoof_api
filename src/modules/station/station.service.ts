@@ -38,8 +38,8 @@ export class StationService {
         listenUrl: response?.listen_url || '',
         public: response?.is_public || true,
         playlists: {
-          m3u: `${process.env.AZURACAST_URL}/public/${process.env.AZURACAST_STATION_ID}/playlist/m3u`,
-          pls: `${process.env.AZURACAST_URL}/public/${process.env.AZURACAST_STATION_ID}/playlist/pls`,
+          m3u: `https://everhoof.ru/m3u`,
+          pls: `https://everhoof.ru/pls`,
         },
         mounts: (response?.mounts || []).map((mount) => ({
           id: mount.id,
