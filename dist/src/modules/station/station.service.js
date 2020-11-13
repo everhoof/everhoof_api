@@ -43,8 +43,8 @@ let StationService = class StationService {
                 listenUrl: (response === null || response === void 0 ? void 0 : response.listen_url) || '',
                 public: (response === null || response === void 0 ? void 0 : response.is_public) || true,
                 playlists: {
-                    m3u: `${process.env.AZURACAST_URL}/public/${process.env.AZURACAST_STATION_ID}/playlist/m3u`,
-                    pls: `${process.env.AZURACAST_URL}/public/${process.env.AZURACAST_STATION_ID}/playlist/pls`,
+                    m3u: `https://everhoof.ru/m3u`,
+                    pls: `https://everhoof.ru/pls`,
                 },
                 mounts: ((response === null || response === void 0 ? void 0 : response.mounts) || []).map((mount) => ({
                     id: mount.id,

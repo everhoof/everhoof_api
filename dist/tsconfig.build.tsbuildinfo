@@ -9186,7 +9186,7 @@
         "affectsGlobalScope": false
       },
       "../src/modules/station/station.service.ts": {
-        "version": "5b68b03cdd91589bbdea4a677e073966e5c232970056855c7bca243d8e4d2b30",
+        "version": "29b95493f4058b0f654913d251c9350828a9a321cd9ccc08b8e5f1c165ca9c69",
         "signature": "9b68770be9883458475f9d11788d2a607c4864e389213f8777757e246fd1bf63",
         "affectsGlobalScope": false
       },
