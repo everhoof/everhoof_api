@@ -1,13 +1,13 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { UseFilters } from '@nestjs/common';
-import { HttpExceptionFilter } from '@common/filters/http-exception.filter';
+import { GraphqlExceptionFilter } from '@common/filters/http-exception.filter';
 import { AccountsService } from '@modules/accounts/accounts.service';
 import { Token } from '@modules/accounts/entities/tokens.entity';
 import { SignInArgs } from '@modules/accounts/args/sign-in.args';
 import { User } from '@modules/users/entities/users.entity';
 import { SignUpArgs } from '@modules/accounts/args/sign-up.args';
 
-@UseFilters(HttpExceptionFilter)
+@UseFilters(GraphqlExceptionFilter)
 @Resolver('Accounts')
 export class AccountsResolver {
   constructor(private readonly accountsService: AccountsService) {}

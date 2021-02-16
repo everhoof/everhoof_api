@@ -1,7 +1,7 @@
 import { Resolver } from '@nestjs/graphql';
 import { UseFilters } from '@nestjs/common';
-import { HttpExceptionFilter } from '@common/filters/http-exception.filter';
+import { GraphqlExceptionFilter } from '@common/filters/http-exception.filter';
 
-@UseFilters(HttpExceptionFilter)
+@UseFilters(GraphqlExceptionFilter)
 @Resolver('Roles')
 export class RolesResolver {}
