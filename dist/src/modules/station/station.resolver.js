@@ -30,7 +30,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], StationResolver.prototype, "getStation", null);
 StationResolver = __decorate([
-    common_1.UseFilters(http_exception_filter_1.HttpExceptionFilter),
+    common_1.UseFilters(http_exception_filter_1.GraphqlExceptionFilter),
     graphql_1.Resolver('Station'),
     __metadata("design:paramtypes", [station_service_1.StationService])
 ], StationResolver);

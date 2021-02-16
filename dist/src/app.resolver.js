@@ -25,7 +25,7 @@ __decorate([
     __metadata("design:returntype", String)
 ], AppResolver.prototype, "getHello", null);
 AppResolver = __decorate([
-    common_1.UseFilters(http_exception_filter_1.HttpExceptionFilter),
+    common_1.UseFilters(http_exception_filter_1.GraphqlExceptionFilter),
     graphql_1.Resolver('App')
 ], AppResolver);
 exports.AppResolver = AppResolver;

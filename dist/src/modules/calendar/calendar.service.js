@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var CalendarService_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CalendarService = void 0;
 const common_1 = require("@nestjs/common");
@@ -15,7 +16,7 @@ const googleapis_1 = require("googleapis");
 const luxon_1 = require("luxon");
 const schedule_1 = require("@nestjs/schedule");
 const calendar_event_1 = require("./types/calendar-event");
-let CalendarService = class CalendarService {
+let CalendarService = CalendarService_1 = class CalendarService {
     constructor() {
         this.calendarEvents = [];
         this.calendar = googleapis_1.google.calendar({
@@ -41,10 +42,12 @@ let CalendarService = class CalendarService {
                 if (event.summary && ((_a = event.start) === null || _a === void 0 ? void 0 : _a.dateTime) && ((_b = event.end) === null || _b === void 0 ? void 0 : _b.dateTime)) {
                     const startsAt = luxon_1.DateTime.fromISO((_c = event.start) === null || _c === void 0 ? void 0 : _c.dateTime).toMillis();
                     const endsAt = luxon_1.DateTime.fromISO((_d = event.end) === null || _d === void 0 ? void 0 : _d.dateTime).toMillis();
+                    const params = CalendarService_1.parseParams(event);
                     acc.push({
                         summary: event.summary,
                         startsAt: startsAt,
                         endsAt: endsAt,
+                        ...params,
                     });
                 }
                 return acc;
@@ -57,14 +60,31 @@ let CalendarService = class CalendarService {
     async getCalendarEvents() {
         return this.calendarEvents;
     }
+    static parseParams(event) {
+        var _a;
+        const params = {
+            notify: true,
+        };
+        const match = (_a = event.description) === null || _a === void 0 ? void 0 : _a.match(/\[(.*)=(.*)]/gm);
+        if (!match)
+            return params;
+        match.forEach((param) => {
+            const pair = param.slice(1, -1).split('=');
+            params[pair[0]] = pair[1];
+            if (pair[0] === 'notify') {
+                params.notify = pair[1] === 'true';
+            }
+        });
+        return params;
+    }
 };
 __decorate([
-    schedule_1.Cron(schedule_1.CronExpression.EVERY_10_MINUTES),
+    schedule_1.Cron(schedule_1.CronExpression.EVERY_MINUTE),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], CalendarService.prototype, "updateCalendarEvents", null);
-CalendarService = __decorate([
+CalendarService = CalendarService_1 = __decorate([
     common_1.Injectable(),
     __metadata("design:paramtypes", [])
 ], CalendarService);

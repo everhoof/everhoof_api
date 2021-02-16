@@ -9,30 +9,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RecordingsResolver = void 0;
-const graphql_1 = require("@nestjs/graphql");
+exports.CalendarController = void 0;
 const common_1 = require("@nestjs/common");
 const http_exception_filter_1 = require("../../common/filters/http-exception.filter");
-const recordings_service_1 = require("./recordings.service");
-const recording_1 = require("./types/recording");
-let RecordingsResolver = class RecordingsResolver {
-    constructor(recordingsService) {
-        this.recordingsService = recordingsService;
+const calendar_service_1 = require("./calendar.service");
+const calendar_event_1 = require("./types/calendar-event");
+const luxon_1 = require("luxon");
+let CalendarController = class CalendarController {
+    constructor(calendarService) {
+        this.calendarService = calendarService;
     }
-    getRecordings() {
-        return this.recordingsService.getRecordings();
+    async getEvents() {
+        const events = await this.calendarService.getCalendarEvents();
+        return events.reduce((acc, event) => {
+            if (event.notify) {
+                acc.push({
+                    summary: event.summary,
+                    starts_at: luxon_1.DateTime.fromMillis(event.startsAt).toISO(),
+                    ends_at: luxon_1.DateTime.fromMillis(event.endsAt).toISO(),
+                });
+            }
+            return acc;
+        }, []);
     }
 };
 __decorate([
-    graphql_1.Query(() => [recording_1.Recording]),
+    common_1.Get('/nogard'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], RecordingsResolver.prototype, "getRecordings", null);
-RecordingsResolver = __decorate([
+], CalendarController.prototype, "getEvents", null);
+CalendarController = __decorate([
     common_1.UseFilters(http_exception_filter_1.GraphqlExceptionFilter),
-    graphql_1.Resolver('Recordings'),
-    __metadata("design:paramtypes", [recordings_service_1.RecordingsService])
-], RecordingsResolver);
-exports.RecordingsResolver = RecordingsResolver;
-//# sourceMappingURL=recordings.resolver.js.map
+    common_1.Controller('calendar'),
+    __metadata("design:paramtypes", [calendar_service_1.CalendarService])
+], CalendarController);
+exports.CalendarController = CalendarController;
+//# sourceMappingURL=calendar.controller.js.map

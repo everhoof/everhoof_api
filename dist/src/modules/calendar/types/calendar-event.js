@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CalendarEvent = void 0;
+exports.CalendarEventDto = exports.CalendarEvent = void 0;
 const graphql_1 = require("@nestjs/graphql");
 let CalendarEvent = class CalendarEvent {
 };
@@ -25,8 +25,15 @@ __decorate([
     graphql_1.Field(() => graphql_1.Float),
     __metadata("design:type", Number)
 ], CalendarEvent.prototype, "endsAt", void 0);
+__decorate([
+    graphql_1.Field(() => Boolean),
+    __metadata("design:type", Boolean)
+], CalendarEvent.prototype, "notify", void 0);
 CalendarEvent = __decorate([
     graphql_1.ObjectType()
 ], CalendarEvent);
 exports.CalendarEvent = CalendarEvent;
+class CalendarEventDto {
+}
+exports.CalendarEventDto = CalendarEventDto;
 //# sourceMappingURL=calendar-event.js.map

@@ -30,7 +30,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CalendarResolver.prototype, "getCalendarEvents", null);
 CalendarResolver = __decorate([
-    common_1.UseFilters(http_exception_filter_1.HttpExceptionFilter),
+    common_1.UseFilters(http_exception_filter_1.GraphqlExceptionFilter),
     graphql_1.Resolver('Calendar'),
     __metadata("design:paramtypes", [calendar_service_1.CalendarService])
 ], CalendarResolver);

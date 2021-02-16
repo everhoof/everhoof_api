@@ -13,7 +13,7 @@ const http_exception_filter_1 = require("../../common/filters/http-exception.fil
 let RolesResolver = class RolesResolver {
 };
 RolesResolver = __decorate([
-    common_1.UseFilters(http_exception_filter_1.HttpExceptionFilter),
+    common_1.UseFilters(http_exception_filter_1.GraphqlExceptionFilter),
     graphql_1.Resolver('Roles')
 ], RolesResolver);
 exports.RolesResolver = RolesResolver;

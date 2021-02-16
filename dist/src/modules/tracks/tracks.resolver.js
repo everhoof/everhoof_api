@@ -67,7 +67,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TracksResolver.prototype, "requestTrack", null);
 TracksResolver = __decorate([
-    common_1.UseFilters(http_exception_filter_1.HttpExceptionFilter),
+    common_1.UseFilters(http_exception_filter_1.GraphqlExceptionFilter),
     graphql_1.Resolver('Tracks'),
     __metadata("design:paramtypes", [tracks_service_1.TracksService])
 ], TracksResolver);

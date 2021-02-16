@@ -6,15 +6,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HttpExceptionFilter = void 0;
+exports.HttpExceptionFilter = exports.GraphqlExceptionFilter = void 0;
 const common_1 = require("@nestjs/common");
 const graphql_1 = require("@nestjs/graphql");
 const exceptions_1 = require("../exceptions/exceptions");
-let HttpExceptionFilter = class HttpExceptionFilter {
+let GraphqlExceptionFilter = class GraphqlExceptionFilter {
     catch(exception, host) {
         const gqlHost = graphql_1.GqlArgumentsHost.create(host);
         const lang = gqlHost.getContext().req.query.lang || 'en';
         return new exceptions_1.CustomHttpException(exception.getStatus(), exception.exception, exception.args, lang);
+    }
+};
+GraphqlExceptionFilter = __decorate([
+    common_1.Catch(exceptions_1.CustomHttpException)
+], GraphqlExceptionFilter);
+exports.GraphqlExceptionFilter = GraphqlExceptionFilter;
+let HttpExceptionFilter = class HttpExceptionFilter {
+    catch(exception, host) {
+        const ctx = host.switchToHttp();
+        const response = ctx.getResponse();
+        const request = ctx.getRequest();
+        const status = exception.getStatus();
+        const lang = request.query.lang || 'en';
+        const translatedException = new exceptions_1.CustomHttpException(exception.getStatus(), exception.exception, exception.args, lang);
+        response.status(status).json(translatedException.getResponse());
     }
 };
 HttpExceptionFilter = __decorate([

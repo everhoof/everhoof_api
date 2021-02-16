@@ -15,4 +15,5 @@ export declare class AuthGuard extends AuthGuard_base {
     canActivate(context: ExecutionContext): Promise<boolean>;
 }
 export declare const CurrentUser: (...dataOrPipes: unknown[]) => ParameterDecorator;
+export declare const Ip: (...dataOrPipes: unknown[]) => ParameterDecorator;
 export {};

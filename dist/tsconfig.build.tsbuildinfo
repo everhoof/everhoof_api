@@ -6405,9 +6405,14 @@
         "signature": "070cba6cebf8558244c37727d75bc62942292a4b67b8c2e3991e7becaf563e2f",
         "affectsGlobalScope": false
       },
+      "../node_modules/@types/express/index.d.ts": {
+        "version": "46453f63ea6f9197248ffb80839f423b14f8d8d7dbb2c4902b8797b44d259859",
+        "signature": "46453f63ea6f9197248ffb80839f423b14f8d8d7dbb2c4902b8797b44d259859",
+        "affectsGlobalScope": false
+      },
       "../src/common/filters/http-exception.filter.ts": {
-        "version": "f9b9df11fdd55a2f0b1c6692ca98b910ac4d06d7d1bd89d46e3a2e13261ed090",
-        "signature": "0ae8e75018810b53e563c9bedcbc74129341557833c942e2ac394253178cd28d",
+        "version": "1e5faa0c0bb8bb6be239526fbea119adb94c2aeb70d75cd2e9b5e36353c7c81b",
+        "signature": "dd67e9f85c1737a73ff55b4cc9bf1d3f67c4a214187a0f285fcff94adcab6ca5",
         "affectsGlobalScope": false
       },
       "../node_modules/@nestjs/passport/dist/abstract.strategy.d.ts": {
@@ -6470,18 +6475,13 @@
         "signature": "8f1241f5d9f0d3d72117768b3c974e462840fbd85026fb66685078945404cf2f",
         "affectsGlobalScope": false
       },
-      "../node_modules/@types/express/index.d.ts": {
-        "version": "46453f63ea6f9197248ffb80839f423b14f8d8d7dbb2c4902b8797b44d259859",
-        "signature": "46453f63ea6f9197248ffb80839f423b14f8d8d7dbb2c4902b8797b44d259859",
-        "affectsGlobalScope": false
-      },
       "../src/common/guards/auth.guard.ts": {
-        "version": "182a8de6d3dfb38d0f98ebea73843016a33a26b693bb662b0cd0dce04044e5b3",
-        "signature": "2fb2b4fc77b93cacd5779f5f147de426caa09ba967de7864932fb5ccf2e0d724",
+        "version": "36adcd3c4e412dbfb1c086088252f7d363f75650bc1c68610520c24f9db06c76",
+        "signature": "d73f95d6a5dd10eb02b45c9560bc4182fcd251bcfa4a1d67471f68b6af0bc052",
         "affectsGlobalScope": false
       },
       "../src/modules/users/users.resolver.ts": {
-        "version": "5fd4a13d7d0da25db56ee86ac3df87e79329fa3128282d054ac2ad7a8adaaba2",
+        "version": "7db07cd250881fe3b09d10d1d97558674952f7972c792f1160e5527bebfaea8f",
         "signature": "58fa37182d0f3ca0d760c19df829582038cf39c160b0f3b3442be66e1e97a492",
         "affectsGlobalScope": false
       },
@@ -6526,7 +6526,7 @@
         "affectsGlobalScope": false
       },
       "../src/modules/accounts/accounts.resolver.ts": {
-        "version": "7ffa63ce58fd5e4c4c6da7cfcbb02d7bc139e7750c2e841fde23e5380e9d9aa6",
+        "version": "c75229dfc2500c9557ba267e86dc98c22f95b0dc75d3ca8e785e2642e1715d7d",
         "signature": "4c288384575b25cd3d5bd486e6b7795bc420d28582711314c1d76348b46f7147",
         "affectsGlobalScope": false
       },
@@ -6671,7 +6671,7 @@
         "affectsGlobalScope": false
       },
       "../src/modules/tracks/tracks.resolver.ts": {
-        "version": "9c0bc006dc5712592e3353caca0b41434de8063e42b3153b8123b38db17deece",
+        "version": "762e145c0571d0612abf5eda1e617e1dd164c3bfbf42e3d0c5efe9bce8f7bd75",
         "signature": "a2962c5c93a69a7aea79d699ffce75424ad74d73a2ed7800a666d33cc766edd3",
         "affectsGlobalScope": false
       },
@@ -9156,22 +9156,27 @@
         "affectsGlobalScope": false
       },
       "../src/modules/calendar/types/calendar-event.ts": {
-        "version": "7e2d1b5282b512cd574003c4cc3b83a927aaab88c1f02aa6a7ad3d1b9ac19fc9",
-        "signature": "9587ce1a6d0c330d364a6d05c069a6d6727b59aba60fbfeef7135e9225275def",
+        "version": "e74ff60d219feebea1ed8265c17b5a6b67651e373bc5b7bde432761c076a3511",
+        "signature": "7a4eea8403e2fc9e63ee1a4a0eef32186a402f5a0a83ebc4ca99a3de23fe1b23",
         "affectsGlobalScope": false
       },
       "../src/modules/calendar/calendar.service.ts": {
-        "version": "32af23d85d6d3ef5769ccbc9b2840597c31933b4f3ca7bb120d35178121507a3",
-        "signature": "dbfe25ee9247f8b60f7fead8bb1800cec0b1ed1ccd0637c943c7ca84a7a32a6c",
+        "version": "c925c7d83472f88f9e1f7a0a4042dcc0d506251bf2c1ca2564df455c3586c5b6",
+        "signature": "87d420e32fa7c60c03e8d4ba847bb8e294385d2ebadf9808218b8e2635ea2950",
         "affectsGlobalScope": false
       },
       "../src/modules/calendar/calendar.resolver.ts": {
-        "version": "5c3840169f44c5df9b57b9bb9756259a9a78489160067f063a3fe3cd756080e7",
+        "version": "7b9b5fc5978fc7a84ac57afb012ae01c48dd62a1b8afc70562beaffde4467124",
         "signature": "acdf43d3e567fb32608a4b61f5e93e13d323074c7e07fac2afc5f59bd37d666c",
         "affectsGlobalScope": false
       },
+      "../src/modules/calendar/calendar.controller.ts": {
+        "version": "52e631da6383d0bdfc4ff847f3d2a9f2a6f8773df041043f7c49aabef182a038",
+        "signature": "33e8bbe919fb3e915f89364a2a6a0cfc286ea155d9e3045e0621aa80cdf9f187",
+        "affectsGlobalScope": false
+      },
       "../src/modules/calendar/calendar.module.ts": {
-        "version": "9de58a0cab4722adf2a53d585e24405275e264f9713c1885bf646aa7d46d439f",
+        "version": "1cd2d6865b40e30008035c8d0a94785b4fb753827d2c9fcf73372a72a8669ce7",
         "signature": "74559271f24da0fc3c17a49e5e176f2fa88904728ea40fdec62e82129e33d66e",
         "affectsGlobalScope": false
       },
@@ -9191,7 +9196,7 @@
         "affectsGlobalScope": false
       },
       "../src/modules/station/station.resolver.ts": {
-        "version": "c5f3ade0e074950d43b7c0ada61b9b36bc4a9085999b8cb76b5380e54e537cc1",
+        "version": "b8a30866b6e0b483dfd1dfe5aa4ad2586c35a019c8910c7e33a4c527af593f65",
         "signature": "9d85a82db61b5fea0807f95383a77217677b1b60120fe943b6f6a8dd3ccf0cf5",
         "affectsGlobalScope": false
       },
@@ -9211,7 +9216,7 @@
         "affectsGlobalScope": false
       },
       "../src/modules/recordings/recordings.resolver.ts": {
-        "version": "5954a7bba4933dadeca9259b01210bc0d00dc19c0d3a5ae5a08b2ab64af9dd6a",
+        "version": "86bae03284547f8e4b992186e54ac23df6fb5525c5f73f217b78291e44cedf5a",
         "signature": "c55331ac84b5db52beacc824495297985324e311d78203d65b0978656df1eb6c",
         "affectsGlobalScope": false
       },
@@ -9226,7 +9231,7 @@
         "affectsGlobalScope": false
       },
       "../src/modules/roles/roles.resolver.ts": {
-        "version": "667ed992db3e80dab5ab070add34e3bc8461a561534f835e6719a0e8d8453a0e",
+        "version": "6710fa20b98f4cad674a188be3a83df366a336cce02eb7cc251e3beee7a75c52",
         "signature": "b5c3aef5a6246d92cbdabaee7ff79d2df670f004e783fca3fe2dee37fee563a3",
         "affectsGlobalScope": false
       },
@@ -9236,7 +9241,7 @@
         "affectsGlobalScope": false
       },
       "../src/app.resolver.ts": {
-        "version": "27bfefbf7a6bf65f6ef6194da9eaf20e5332bf50dd15097ff1d706e575590a92",
+        "version": "b2fe39dd57bb019d9e8e2db3a8d144606cf4dfc2e3fce5e6d822c8be37de3ebf",
         "signature": "31644da77f44744f4bd78b432c6bc96237c5eb5d213b99e166c50c2089f47ed1",
         "affectsGlobalScope": false
       },
@@ -31490,6 +31495,7 @@
       "../src/common/filters/http-exception.filter.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/graphql/index.d.ts",
+        "../node_modules/@types/express/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/process.d.ts",
@@ -31696,6 +31702,20 @@
         "../src/modules/accounts/accounts.service.ts",
         "../src/modules/users/entities/users.entity.ts"
       ],
+      "../src/modules/calendar/calendar.controller.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/luxon/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../src/common/filters/http-exception.filter.ts",
+        "../src/modules/calendar/calendar.service.ts",
+        "../src/modules/calendar/types/calendar-event.ts"
+      ],
       "../src/modules/calendar/calendar.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
@@ -31705,6 +31725,7 @@
         "../node_modules/@types/node/ts3.2/process.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
+        "../src/modules/calendar/calendar.controller.ts",
         "../src/modules/calendar/calendar.resolver.ts",
         "../src/modules/calendar/calendar.service.ts"
       ],
@@ -53977,6 +53998,10 @@
         "../node_modules/@types/passport-http-bearer/index.d.ts",
         "../src/modules/accounts/accounts.service.ts",
         "../src/modules/users/entities/users.entity.ts"
+      ],
+      "../src/modules/calendar/calendar.controller.ts": [
+        "../src/modules/calendar/calendar.service.ts",
+        "../src/modules/calendar/types/calendar-event.ts"
       ],
       "../src/modules/calendar/calendar.resolver.ts": [
         "../src/modules/calendar/calendar.service.ts",

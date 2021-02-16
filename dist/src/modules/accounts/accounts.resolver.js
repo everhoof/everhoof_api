@@ -47,7 +47,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AccountsResolver.prototype, "signUp", null);
 AccountsResolver = __decorate([
-    common_1.UseFilters(http_exception_filter_1.HttpExceptionFilter),
+    common_1.UseFilters(http_exception_filter_1.GraphqlExceptionFilter),
     graphql_1.Resolver('Accounts'),
     __metadata("design:paramtypes", [accounts_service_1.AccountsService])
 ], AccountsResolver);

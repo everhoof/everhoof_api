@@ -5,4 +5,5 @@ export declare class CalendarService {
     constructor();
     updateCalendarEvents(): Promise<CalendarEvent | undefined>;
     getCalendarEvents(): Promise<CalendarEvent[]>;
+    private static parseParams;
 }
