@@ -3,7 +3,7 @@ import { calendar_v3, google } from 'googleapis';
 import Calendar = calendar_v3.Calendar;
 import { DateTime } from 'luxon';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { CalendarEvent } from '@modules/calendar/types/calendar-event';
+import { CalendarEvent, CalendarEventParams } from '@modules/calendar/types/calendar-event';
 
 @Injectable()
 export class CalendarService {
@@ -18,7 +18,7 @@ export class CalendarService {
     this.updateCalendarEvents().catch(console.error);
   }
 
-  @Cron(CronExpression.EVERY_10_MINUTES)
+  @Cron(CronExpression.EVERY_MINUTE)
   async updateCalendarEvents(): Promise<CalendarEvent | undefined> {
     const date = new Date();
     date.setDate(date.getDate() - 1);
@@ -36,10 +36,12 @@ export class CalendarService {
         if (event.summary && event.start?.dateTime && event.end?.dateTime) {
           const startsAt = DateTime.fromISO(event.start?.dateTime).toMillis();
           const endsAt = DateTime.fromISO(event.end?.dateTime).toMillis();
+          const params = CalendarService.parseParams(event);
           acc.push({
             summary: event.summary,
             startsAt: startsAt,
             endsAt: endsAt,
+            ...params,
           });
         }
         return acc;
@@ -51,5 +53,24 @@ export class CalendarService {
 
   async getCalendarEvents(): Promise<CalendarEvent[]> {
     return this.calendarEvents;
+  }
+
+  private static parseParams(event: calendar_v3.Schema$Event): CalendarEventParams {
+    const params: CalendarEventParams = {
+      notify: true,
+    };
+    const match = event.description?.match(/\[(.*)=(.*)]/gm);
+    if (!match) return params;
+
+    match.forEach((param) => {
+      const pair = param.slice(1, -1).split('=');
+      params[pair[0]] = pair[1];
+
+      if (pair[0] === 'notify') {
+        params.notify = pair[1] === 'true';
+      }
+    });
+
+    return params;
   }
 }

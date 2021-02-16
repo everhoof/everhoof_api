@@ -6,6 +6,7 @@ type CalendarEvent {
   summary: String!
   startsAt: Float!
   endsAt: Float!
+  notify: Boolean!
 }
 
 type CurrentPlaying {
@@ -80,7 +81,7 @@ type Query {
   getCurrentUser: User!
   getCurrentPlaying: CurrentPlaying
   getTracksHistory: [HistoryItem!]!
-  searchTracks(page: Int = 1, count: Int = 10, q: String!): TrackSearchResponse!
+  searchTracks(page: Int = 1, count: Int = 10, q: String = ""): TrackSearchResponse!
   requestTrack(songId: String!): TrackRequestResponse!
   getCalendarEvents: [CalendarEvent!]!
   getStation: Station!
