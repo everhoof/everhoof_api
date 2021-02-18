@@ -9156,12 +9156,12 @@
         "affectsGlobalScope": false
       },
       "../src/modules/calendar/types/calendar-event.ts": {
-        "version": "e74ff60d219feebea1ed8265c17b5a6b67651e373bc5b7bde432761c076a3511",
-        "signature": "7a4eea8403e2fc9e63ee1a4a0eef32186a402f5a0a83ebc4ca99a3de23fe1b23",
+        "version": "b819f5f3ef051ec94645bcbe02d8b7e21c9c8acb72e2a2676a38a8204f197201",
+        "signature": "5a0f7c9ec41e61af5559cb8c44027e3ac101676255078fa54b8fd6dedaaf354f",
         "affectsGlobalScope": false
       },
       "../src/modules/calendar/calendar.service.ts": {
-        "version": "c925c7d83472f88f9e1f7a0a4042dcc0d506251bf2c1ca2564df455c3586c5b6",
+        "version": "f39668c117d62986066666fbf56579c8e643796e72d3c5d4c0b22a0d7711fc6a",
         "signature": "87d420e32fa7c60c03e8d4ba847bb8e294385d2ebadf9808218b8e2635ea2950",
         "affectsGlobalScope": false
       },
@@ -9171,7 +9171,7 @@
         "affectsGlobalScope": false
       },
       "../src/modules/calendar/calendar.controller.ts": {
-        "version": "52e631da6383d0bdfc4ff847f3d2a9f2a6f8773df041043f7c49aabef182a038",
+        "version": "7a785e134ddafa75d752785548b444b0441cbe2cfd441f6d6289c2c4848b089b",
         "signature": "33e8bbe919fb3e915f89364a2a6a0cfc286ea155d9e3045e0621aa80cdf9f187",
         "affectsGlobalScope": false
       },

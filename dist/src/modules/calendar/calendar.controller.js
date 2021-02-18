@@ -27,6 +27,7 @@ let CalendarController = class CalendarController {
                     summary: event.summary,
                     starts_at: luxon_1.DateTime.fromMillis(event.startsAt).toISO(),
                     ends_at: luxon_1.DateTime.fromMillis(event.endsAt).toISO(),
+                    preview: event.preview,
                 });
             }
             return acc;

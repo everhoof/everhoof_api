@@ -26,6 +26,10 @@ __decorate([
     __metadata("design:type", Number)
 ], CalendarEvent.prototype, "endsAt", void 0);
 __decorate([
+    graphql_1.Field(() => String),
+    __metadata("design:type", String)
+], CalendarEvent.prototype, "preview", void 0);
+__decorate([
     graphql_1.Field(() => Boolean),
     __metadata("design:type", Boolean)
 ], CalendarEvent.prototype, "notify", void 0);

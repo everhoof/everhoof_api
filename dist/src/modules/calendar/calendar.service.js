@@ -64,6 +64,7 @@ let CalendarService = CalendarService_1 = class CalendarService {
         var _a;
         const params = {
             notify: true,
+            preview: '',
         };
         const match = (_a = event.description) === null || _a === void 0 ? void 0 : _a.match(/\[(.*)=(.*)]/gm);
         if (!match)
@@ -71,8 +72,13 @@ let CalendarService = CalendarService_1 = class CalendarService {
         match.forEach((param) => {
             const pair = param.slice(1, -1).split('=');
             params[pair[0]] = pair[1];
-            if (pair[0] === 'notify') {
-                params.notify = pair[1] === 'true';
+            switch (pair[0]) {
+                case 'notify':
+                    params[pair[0]] = pair[1] === 'true';
+                    break;
+                default:
+                    params[pair[0]] = pair[1];
+                    break;
             }
         });
         return params;
