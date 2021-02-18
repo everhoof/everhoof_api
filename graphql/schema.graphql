@@ -6,6 +6,7 @@ type CalendarEvent {
   summary: String!
   startsAt: Float!
   endsAt: Float!
+  preview: String!
   notify: Boolean!
 }
 

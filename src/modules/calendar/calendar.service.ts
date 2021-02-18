@@ -58,6 +58,7 @@ export class CalendarService {
   private static parseParams(event: calendar_v3.Schema$Event): CalendarEventParams {
     const params: CalendarEventParams = {
       notify: true,
+      preview: '',
     };
     const match = event.description?.match(/\[(.*)=(.*)]/gm);
     if (!match) return params;
@@ -66,8 +67,13 @@ export class CalendarService {
       const pair = param.slice(1, -1).split('=');
       params[pair[0]] = pair[1];
 
-      if (pair[0] === 'notify') {
-        params.notify = pair[1] === 'true';
+      switch (pair[0]) {
+        case 'notify':
+          params[pair[0]] = pair[1] === 'true';
+          break;
+        default:
+          params[pair[0]] = pair[1];
+          break;
       }
     });
 

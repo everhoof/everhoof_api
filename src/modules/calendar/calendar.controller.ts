@@ -18,6 +18,7 @@ export class CalendarController {
           summary: event.summary,
           starts_at: DateTime.fromMillis(event.startsAt).toISO(),
           ends_at: DateTime.fromMillis(event.endsAt).toISO(),
+          preview: event.preview,
         });
       }
       return acc;
