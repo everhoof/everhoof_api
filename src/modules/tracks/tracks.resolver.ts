@@ -8,6 +8,7 @@ import { TrackSearchResponse } from '@modules/tracks/types/track-search-response
 import { TrackSearchArgs } from '@modules/tracks/args/track-search.args';
 import { TrackRequestArgs } from '@modules/tracks/args/track-request.args';
 import { TrackRequestResponse } from '@modules/tracks/types/track-request-response';
+import { Ip } from '@common/decorators/ip.decorator';
 
 @UseFilters(GraphqlExceptionFilter)
 @Resolver('Tracks')
@@ -30,7 +31,7 @@ export class TracksResolver {
   }
 
   @Query(() => TrackRequestResponse)
-  requestTrack(@Args() args: TrackRequestArgs): Promise<TrackRequestResponse> {
-    return this.tracksService.requestTrack(args);
+  requestTrack(@Args() args: TrackRequestArgs, @Ip() ip?: string): Promise<TrackRequestResponse> {
+    return this.tracksService.requestTrack(args, ip);
   }
 }

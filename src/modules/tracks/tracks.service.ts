@@ -68,10 +68,15 @@ export class TracksService {
     };
   }
 
-  async requestTrack(args: TrackRequestArgs): Promise<TrackRequestResponse> {
+  async requestTrack(args: TrackRequestArgs, ip?: string): Promise<TrackRequestResponse> {
     try {
+      const headers = {};
+      if (ip) {
+        headers['X-Forwarded-For'] = ip;
+      }
       const response = await this.azuracastClient(
         `station/${process.env.AZURACAST_STATION_ID}/request/${args.songId}`,
+        { headers },
       ).json<AzuracastRequestResponse>();
 
       return {
