@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import got, { Got } from 'got';
 import { CurrentPlaying } from '@modules/tracks/types/current-playing';
 import { Interval } from '@nestjs/schedule';
@@ -9,6 +9,9 @@ import { TrackSearchResponse } from '@modules/tracks/types/track-search-response
 import { TrackSearchArgs } from '@modules/tracks/args/track-search.args';
 import { TrackRequestArgs } from '@modules/tracks/args/track-request.args';
 import { TrackRequestResponse } from '@modules/tracks/types/track-request-response';
+import { TracksGateway } from '@modules/tracks/tracks.gateway';
+import { GatewayTrack } from '@modules/tracks/types/gateway';
+import { DateTime } from 'luxon';
 
 @Injectable()
 export class TracksService {
@@ -16,7 +19,10 @@ export class TracksService {
   private currentPlaying?: CurrentPlaying;
   private tracksHistory: HistoryItem[] = [];
 
-  constructor() {
+  constructor(
+    @Inject(forwardRef(() => TracksGateway))
+    private readonly tracksGateway: TracksGateway,
+  ) {
     this.azuracastClient = got.extend({
       responseType: 'json',
       prefixUrl: `${process.env.AZURACAST_URL}/api/`,
@@ -111,6 +117,10 @@ export class TracksService {
       let endsAt: number = startsAt + duration * 1000;
       let art: string = response.now_playing?.song.art || '';
 
+      if (art && process.env.AZURACAST_URL && process.env.AZURACAST_PUBLIC_URL) {
+        art = art.replace(process.env.AZURACAST_URL, process.env.AZURACAST_PUBLIC_URL);
+      }
+
       currentPlaying.current = { id, title, artist, name, duration, startsAt, endsAt, art };
 
       id = response.playing_next?.song.id || '';
@@ -152,7 +162,13 @@ export class TracksService {
       currentPlaying.timestamp = Date.now();
 
       currentPlaying.listenersCount = response.listeners?.unique || 0;
-      this.currentPlaying = currentPlaying;
+
+      if (this.currentPlaying?.current.id !== currentPlaying.current.id) {
+        this.currentPlaying = currentPlaying;
+        this.tracksGateway.sendCurrentTrack();
+      } else {
+        this.currentPlaying = currentPlaying;
+      }
 
       this.tracksHistory = response.song_history.map((item) => ({
         id: item.sh_id,
@@ -168,12 +184,35 @@ export class TracksService {
           title: item.song.title,
           album: item.song.album,
           lyrics: item.song.lyrics,
-          art: item.song.art,
+          art: (item.song.art || '').replace(process.env.AZURACAST_URL || '', process.env.AZURACAST_PUBLIC_URL || ''),
         },
       }));
     } catch (e) {
       console.error(e);
       return;
     }
+  }
+
+  getGatewayTrack(): GatewayTrack | undefined {
+    let track: GatewayTrack | undefined;
+
+    if (this.currentPlaying?.current) {
+      track = {
+        id: this.currentPlaying.current.id,
+        title: this.currentPlaying.current.title,
+        artist: this.currentPlaying.current.artist,
+        name: this.currentPlaying.current.name,
+        art: this.currentPlaying.current.art,
+        duration: this.currentPlaying.current.duration,
+        starts_at: this.currentPlaying.current.startsAt
+          ? DateTime.fromMillis(this.currentPlaying.current.startsAt).toISO()
+          : null,
+        ends_at: this.currentPlaying.current.endsAt
+          ? DateTime.fromMillis(this.currentPlaying.current.endsAt).toISO()
+          : null,
+      };
+    }
+
+    return track;
   }
 }
