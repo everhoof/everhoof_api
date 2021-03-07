@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -24,8 +27,12 @@ const track_search_response_1 = require("./types/track-search-response");
 const track_search_args_1 = require("./args/track-search.args");
 const track_request_args_1 = require("./args/track-request.args");
 const track_request_response_1 = require("./types/track-request-response");
+const tracks_gateway_1 = require("./tracks.gateway");
+const gateway_1 = require("./types/gateway");
+const luxon_1 = require("luxon");
 let TracksService = class TracksService {
-    constructor() {
+    constructor(tracksGateway) {
+        this.tracksGateway = tracksGateway;
         this.tracksHistory = [];
         this.azuracastClient = got_1.default.extend({
             responseType: 'json',
@@ -95,7 +102,7 @@ let TracksService = class TracksService {
         }
     }
     async updateCurrentPlaying() {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
         const currentPlaying = new current_playing_1.CurrentPlaying();
         try {
             const response = await this.azuracastClient(`nowplaying/${process.env.AZURACAST_STATION_ID}`).json();
@@ -109,6 +116,9 @@ let TracksService = class TracksService {
             let startsAt = (((_f = response.now_playing) === null || _f === void 0 ? void 0 : _f.played_at) || 0) * 1000 || Date.now();
             let endsAt = startsAt + duration * 1000;
             let art = ((_g = response.now_playing) === null || _g === void 0 ? void 0 : _g.song.art) || '';
+            if (art && process.env.AZURACAST_URL && process.env.AZURACAST_PUBLIC_URL) {
+                art = art.replace(process.env.AZURACAST_URL, process.env.AZURACAST_PUBLIC_URL);
+            }
             currentPlaying.current = { id, title, artist, name, duration, startsAt, endsAt, art };
             id = ((_h = response.playing_next) === null || _h === void 0 ? void 0 : _h.song.id) || '';
             title = ((_j = response.playing_next) === null || _j === void 0 ? void 0 : _j.song.title) || '';
@@ -141,7 +151,13 @@ let TracksService = class TracksService {
             };
             currentPlaying.timestamp = Date.now();
             currentPlaying.listenersCount = ((_t = response.listeners) === null || _t === void 0 ? void 0 : _t.unique) || 0;
-            this.currentPlaying = currentPlaying;
+            if (((_u = this.currentPlaying) === null || _u === void 0 ? void 0 : _u.current.id) !== currentPlaying.current.id) {
+                this.currentPlaying = currentPlaying;
+                this.tracksGateway.sendCurrentTrack();
+            }
+            else {
+                this.currentPlaying = currentPlaying;
+            }
             this.tracksHistory = response.song_history.map((item) => ({
                 id: item.sh_id,
                 playedAt: item.played_at,
@@ -156,7 +172,7 @@ let TracksService = class TracksService {
                     title: item.song.title,
                     album: item.song.album,
                     lyrics: item.song.lyrics,
-                    art: item.song.art,
+                    art: (item.song.art || '').replace(process.env.AZURACAST_URL || '', process.env.AZURACAST_PUBLIC_URL || ''),
                 },
             }));
         }
@@ -164,6 +180,27 @@ let TracksService = class TracksService {
             console.error(e);
             return;
         }
+    }
+    getGatewayTrack() {
+        var _a;
+        let track;
+        if ((_a = this.currentPlaying) === null || _a === void 0 ? void 0 : _a.current) {
+            track = {
+                id: this.currentPlaying.current.id,
+                title: this.currentPlaying.current.title,
+                artist: this.currentPlaying.current.artist,
+                name: this.currentPlaying.current.name,
+                art: this.currentPlaying.current.art,
+                duration: this.currentPlaying.current.duration,
+                starts_at: this.currentPlaying.current.startsAt
+                    ? luxon_1.DateTime.fromMillis(this.currentPlaying.current.startsAt).toISO()
+                    : null,
+                ends_at: this.currentPlaying.current.endsAt
+                    ? luxon_1.DateTime.fromMillis(this.currentPlaying.current.endsAt).toISO()
+                    : null,
+            };
+        }
+        return track;
     }
 };
 __decorate([
@@ -174,7 +211,8 @@ __decorate([
 ], TracksService.prototype, "updateCurrentPlaying", null);
 TracksService = __decorate([
     common_1.Injectable(),
-    __metadata("design:paramtypes", [])
+    __param(0, common_1.Inject(common_1.forwardRef(() => tracks_gateway_1.TracksGateway))),
+    __metadata("design:paramtypes", [tracks_gateway_1.TracksGateway])
 ], TracksService);
 exports.TracksService = TracksService;
 //# sourceMappingURL=tracks.service.js.map

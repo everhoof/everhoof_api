@@ -10,11 +10,12 @@ exports.TracksModule = void 0;
 const common_1 = require("@nestjs/common");
 const tracks_service_1 = require("./tracks.service");
 const tracks_resolver_1 = require("./tracks.resolver");
+const tracks_gateway_1 = require("./tracks.gateway");
 let TracksModule = class TracksModule {
 };
 TracksModule = __decorate([
     common_1.Module({
-        providers: [tracks_service_1.TracksService, tracks_resolver_1.TracksResolver],
+        providers: [tracks_service_1.TracksService, tracks_resolver_1.TracksResolver, tracks_gateway_1.TracksGateway],
     })
 ], TracksModule);
 exports.TracksModule = TracksModule;
