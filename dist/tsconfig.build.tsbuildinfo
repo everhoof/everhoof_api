@@ -6796,7 +6796,7 @@
         "affectsGlobalScope": false
       },
       "../src/modules/tracks/tracks.gateway.ts": {
-        "version": "fc45eb90e27b29b18cfb5bae01d2212a75fd35ffdd3b3040fb562e060bb7dc7d",
+        "version": "0df2c95520ee6218b83739e3990a5ac2c286ade72fe93362cc46ebfab4efe142",
         "signature": "e21e9d69906e6630591100eb220c594d677ad6419216a600a368cc9ee5a3dd2f",
         "affectsGlobalScope": false
       },

@@ -16,7 +16,6 @@ exports.TracksGateway = void 0;
 const websockets_1 = require("@nestjs/websockets");
 const common_1 = require("@nestjs/common");
 const tracks_service_1 = require("./tracks.service");
-const WS_PORT = Number(process.env.WS_PORT) || undefined;
 let TracksGateway = class TracksGateway {
     constructor(tracksService) {
         this.tracksService = tracksService;
@@ -36,7 +35,7 @@ __decorate([
     __metadata("design:type", Object)
 ], TracksGateway.prototype, "server", void 0);
 TracksGateway = __decorate([
-    websockets_1.WebSocketGateway(WS_PORT),
+    websockets_1.WebSocketGateway(5501),
     __param(0, common_1.Inject(common_1.forwardRef(() => tracks_service_1.TracksService))),
     __metadata("design:paramtypes", [tracks_service_1.TracksService])
 ], TracksGateway);
