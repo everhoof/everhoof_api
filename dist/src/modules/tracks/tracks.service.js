@@ -118,6 +118,9 @@ let TracksService = class TracksService {
             startsAt = (((_o = response.playing_next) === null || _o === void 0 ? void 0 : _o.cued_at) || 0) * 1000 || Date.now();
             endsAt = startsAt + duration * 1000;
             art = ((_p = response.playing_next) === null || _p === void 0 ? void 0 : _p.song.art) || '';
+            if (art && process.env.AZURACAST_URL && process.env.AZURACAST_PUBLIC_URL) {
+                art = art.replace(process.env.AZURACAST_URL, process.env.AZURACAST_PUBLIC_URL);
+            }
             currentPlaying.next = { id, title, artist, name, duration, startsAt, endsAt, art };
             id = response.song_history[0].song.id || '';
             title = response.song_history[0].song.title || '';
@@ -127,6 +130,9 @@ let TracksService = class TracksService {
             startsAt = (response.song_history[0].played_at || 0) * 1000 || Date.now();
             endsAt = startsAt + duration * 1000;
             art = response.song_history[0].song.art || '';
+            if (art && process.env.AZURACAST_URL && process.env.AZURACAST_PUBLIC_URL) {
+                art = art.replace(process.env.AZURACAST_URL, process.env.AZURACAST_PUBLIC_URL);
+            }
             currentPlaying.previous = { id, title, artist, name, duration, startsAt, endsAt, art };
             currentPlaying.live = {
                 isLive: ((_q = response.live) === null || _q === void 0 ? void 0 : _q.is_live) || false,
