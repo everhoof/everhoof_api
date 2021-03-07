@@ -75,9 +75,13 @@ let TracksService = class TracksService {
             })),
         };
     }
-    async requestTrack(args) {
+    async requestTrack(args, ip) {
         try {
-            const response = await this.azuracastClient(`station/${process.env.AZURACAST_STATION_ID}/request/${args.songId}`).json();
+            const headers = {};
+            if (ip) {
+                headers['X-Forwarded-For'] = ip;
+            }
+            const response = await this.azuracastClient(`station/${process.env.AZURACAST_STATION_ID}/request/${args.songId}`, { headers }).json();
             return {
                 success: response.success,
                 message: response.message,

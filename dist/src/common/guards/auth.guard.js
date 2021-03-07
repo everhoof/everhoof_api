@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Ip = exports.CurrentUser = exports.AuthGuard = exports.GqlAuthGuard = void 0;
+exports.CurrentUser = exports.AuthGuard = exports.GqlAuthGuard = void 0;
 const core_1 = require("@nestjs/core");
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
@@ -55,9 +55,5 @@ exports.AuthGuard = AuthGuard;
 exports.CurrentUser = common_1.createParamDecorator((data, context) => {
     const ctx = graphql_1.GqlExecutionContext.create(context);
     return ctx.getContext().req.user;
-});
-exports.Ip = common_1.createParamDecorator((data, context) => {
-    const ctx = graphql_1.GqlExecutionContext.create(context);
-    return ctx.getContext().req.ip;
 });
 //# sourceMappingURL=auth.guard.js.map

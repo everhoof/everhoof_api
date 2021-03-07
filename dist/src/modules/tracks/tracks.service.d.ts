@@ -12,6 +12,6 @@ export declare class TracksService {
     getCurrentPlaying(): Promise<CurrentPlaying | undefined>;
     getTracksHistory(): Promise<HistoryItem[]>;
     searchTracks(trackSearchArgs: TrackSearchArgs): Promise<TrackSearchResponse>;
-    requestTrack(args: TrackRequestArgs): Promise<TrackRequestResponse>;
+    requestTrack(args: TrackRequestArgs, ip?: string): Promise<TrackRequestResponse>;
     private updateCurrentPlaying;
 }

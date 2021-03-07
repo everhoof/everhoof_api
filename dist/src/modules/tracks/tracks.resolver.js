@@ -23,6 +23,7 @@ const track_search_response_1 = require("./types/track-search-response");
 const track_search_args_1 = require("./args/track-search.args");
 const track_request_args_1 = require("./args/track-request.args");
 const track_request_response_1 = require("./types/track-request-response");
+const ip_decorator_1 = require("../../common/decorators/ip.decorator");
 let TracksResolver = class TracksResolver {
     constructor(tracksService) {
         this.tracksService = tracksService;
@@ -36,8 +37,8 @@ let TracksResolver = class TracksResolver {
     searchTracks(trackSearchArgs) {
         return this.tracksService.searchTracks(trackSearchArgs);
     }
-    requestTrack(args) {
-        return this.tracksService.requestTrack(args);
+    requestTrack(args, ip) {
+        return this.tracksService.requestTrack(args, ip);
     }
 };
 __decorate([
@@ -61,9 +62,9 @@ __decorate([
 ], TracksResolver.prototype, "searchTracks", null);
 __decorate([
     graphql_1.Query(() => track_request_response_1.TrackRequestResponse),
-    __param(0, graphql_1.Args()),
+    __param(0, graphql_1.Args()), __param(1, ip_decorator_1.Ip()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [track_request_args_1.TrackRequestArgs]),
+    __metadata("design:paramtypes", [track_request_args_1.TrackRequestArgs, String]),
     __metadata("design:returntype", Promise)
 ], TracksResolver.prototype, "requestTrack", null);
 TracksResolver = __decorate([
