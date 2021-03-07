@@ -122,6 +122,10 @@ export class TracksService {
       endsAt = startsAt + duration * 1000;
       art = response.playing_next?.song.art || '';
 
+      if (art && process.env.AZURACAST_URL && process.env.AZURACAST_PUBLIC_URL) {
+        art = art.replace(process.env.AZURACAST_URL, process.env.AZURACAST_PUBLIC_URL);
+      }
+
       currentPlaying.next = { id, title, artist, name, duration, startsAt, endsAt, art };
 
       id = response.song_history[0].song.id || '';
@@ -132,6 +136,10 @@ export class TracksService {
       startsAt = (response.song_history[0].played_at || 0) * 1000 || Date.now();
       endsAt = startsAt + duration * 1000;
       art = response.song_history[0].song.art || '';
+
+      if (art && process.env.AZURACAST_URL && process.env.AZURACAST_PUBLIC_URL) {
+        art = art.replace(process.env.AZURACAST_URL, process.env.AZURACAST_PUBLIC_URL);
+      }
 
       currentPlaying.previous = { id, title, artist, name, duration, startsAt, endsAt, art };
 
