@@ -6796,7 +6796,7 @@
         "affectsGlobalScope": false
       },
       "../src/modules/tracks/tracks.gateway.ts": {
-        "version": "f5967d4fe5e2fed11a68ca9b25ce6835bf290d911f8293a0f8a6bf3ec0a47fc4",
+        "version": "fc45eb90e27b29b18cfb5bae01d2212a75fd35ffdd3b3040fb562e060bb7dc7d",
         "signature": "e21e9d69906e6630591100eb220c594d677ad6419216a600a368cc9ee5a3dd2f",
         "affectsGlobalScope": false
       },
@@ -6811,7 +6811,7 @@
         "affectsGlobalScope": false
       },
       "../src/modules/tracks/tracks.service.ts": {
-        "version": "4ed5390a5765855a4362616f5487c68079b8630b366421b795415a5c02e59539",
+        "version": "cbfba4af5af55647ebfc66c6edf807854e4193e0f8d4db0dc587bb19adbf44ca",
         "signature": "bec2e7c1109f4302e0495fd807a96fba8b703e7fa0e7460ae8b4b717be0794ba",
         "affectsGlobalScope": false
       },

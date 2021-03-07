@@ -116,8 +116,8 @@ let TracksService = class TracksService {
             let startsAt = (((_f = response.now_playing) === null || _f === void 0 ? void 0 : _f.played_at) || 0) * 1000 || Date.now();
             let endsAt = startsAt + duration * 1000;
             let art = ((_g = response.now_playing) === null || _g === void 0 ? void 0 : _g.song.art) || '';
-            if (art && process.env.AZURACAST_URL && process.env.AZURACAST_PUBLIC_URL) {
-                art = art.replace(process.env.AZURACAST_URL, process.env.AZURACAST_PUBLIC_URL);
+            if (art && process.env.AZURACAST_PUBLIC_URL && process.env.AZURACAST_REAL_PUBLIC_URL) {
+                art = art.replace(process.env.AZURACAST_PUBLIC_URL, process.env.AZURACAST_REAL_PUBLIC_URL);
             }
             currentPlaying.current = { id, title, artist, name, duration, startsAt, endsAt, art };
             id = ((_h = response.playing_next) === null || _h === void 0 ? void 0 : _h.song.id) || '';
@@ -128,8 +128,8 @@ let TracksService = class TracksService {
             startsAt = (((_o = response.playing_next) === null || _o === void 0 ? void 0 : _o.cued_at) || 0) * 1000 || Date.now();
             endsAt = startsAt + duration * 1000;
             art = ((_p = response.playing_next) === null || _p === void 0 ? void 0 : _p.song.art) || '';
-            if (art && process.env.AZURACAST_URL && process.env.AZURACAST_PUBLIC_URL) {
-                art = art.replace(process.env.AZURACAST_URL, process.env.AZURACAST_PUBLIC_URL);
+            if (art && process.env.AZURACAST_PUBLIC_URL && process.env.AZURACAST_REAL_PUBLIC_URL) {
+                art = art.replace(process.env.AZURACAST_PUBLIC_URL, process.env.AZURACAST_REAL_PUBLIC_URL);
             }
             currentPlaying.next = { id, title, artist, name, duration, startsAt, endsAt, art };
             id = response.song_history[0].song.id || '';
@@ -140,8 +140,8 @@ let TracksService = class TracksService {
             startsAt = (response.song_history[0].played_at || 0) * 1000 || Date.now();
             endsAt = startsAt + duration * 1000;
             art = response.song_history[0].song.art || '';
-            if (art && process.env.AZURACAST_URL && process.env.AZURACAST_PUBLIC_URL) {
-                art = art.replace(process.env.AZURACAST_URL, process.env.AZURACAST_PUBLIC_URL);
+            if (art && process.env.AZURACAST_PUBLIC_URL && process.env.AZURACAST_REAL_PUBLIC_URL) {
+                art = art.replace(process.env.AZURACAST_PUBLIC_URL, process.env.AZURACAST_REAL_PUBLIC_URL);
             }
             currentPlaying.previous = { id, title, artist, name, duration, startsAt, endsAt, art };
             currentPlaying.live = {
@@ -172,7 +172,7 @@ let TracksService = class TracksService {
                     title: item.song.title,
                     album: item.song.album,
                     lyrics: item.song.lyrics,
-                    art: (item.song.art || '').replace(process.env.AZURACAST_URL || '', process.env.AZURACAST_PUBLIC_URL || ''),
+                    art: (item.song.art || '').replace(process.env.AZURACAST_PUBLIC_URL || '', process.env.AZURACAST_REAL_PUBLIC_URL || ''),
                 },
             }));
         }
