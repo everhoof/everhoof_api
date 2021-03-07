@@ -117,8 +117,8 @@ export class TracksService {
       let endsAt: number = startsAt + duration * 1000;
       let art: string = response.now_playing?.song.art || '';
 
-      if (art && process.env.AZURACAST_URL && process.env.AZURACAST_PUBLIC_URL) {
-        art = art.replace(process.env.AZURACAST_URL, process.env.AZURACAST_PUBLIC_URL);
+      if (art && process.env.AZURACAST_PUBLIC_URL && process.env.AZURACAST_REAL_PUBLIC_URL) {
+        art = art.replace(process.env.AZURACAST_PUBLIC_URL, process.env.AZURACAST_REAL_PUBLIC_URL);
       }
 
       currentPlaying.current = { id, title, artist, name, duration, startsAt, endsAt, art };
@@ -132,8 +132,8 @@ export class TracksService {
       endsAt = startsAt + duration * 1000;
       art = response.playing_next?.song.art || '';
 
-      if (art && process.env.AZURACAST_URL && process.env.AZURACAST_PUBLIC_URL) {
-        art = art.replace(process.env.AZURACAST_URL, process.env.AZURACAST_PUBLIC_URL);
+      if (art && process.env.AZURACAST_PUBLIC_URL && process.env.AZURACAST_REAL_PUBLIC_URL) {
+        art = art.replace(process.env.AZURACAST_PUBLIC_URL, process.env.AZURACAST_REAL_PUBLIC_URL);
       }
 
       currentPlaying.next = { id, title, artist, name, duration, startsAt, endsAt, art };
@@ -147,8 +147,8 @@ export class TracksService {
       endsAt = startsAt + duration * 1000;
       art = response.song_history[0].song.art || '';
 
-      if (art && process.env.AZURACAST_URL && process.env.AZURACAST_PUBLIC_URL) {
-        art = art.replace(process.env.AZURACAST_URL, process.env.AZURACAST_PUBLIC_URL);
+      if (art && process.env.AZURACAST_PUBLIC_URL && process.env.AZURACAST_REAL_PUBLIC_URL) {
+        art = art.replace(process.env.AZURACAST_PUBLIC_URL, process.env.AZURACAST_REAL_PUBLIC_URL);
       }
 
       currentPlaying.previous = { id, title, artist, name, duration, startsAt, endsAt, art };
@@ -184,7 +184,10 @@ export class TracksService {
           title: item.song.title,
           album: item.song.album,
           lyrics: item.song.lyrics,
-          art: (item.song.art || '').replace(process.env.AZURACAST_URL || '', process.env.AZURACAST_PUBLIC_URL || ''),
+          art: (item.song.art || '').replace(
+            process.env.AZURACAST_PUBLIC_URL || '',
+            process.env.AZURACAST_REAL_PUBLIC_URL || '',
+          ),
         },
       }));
     } catch (e) {
