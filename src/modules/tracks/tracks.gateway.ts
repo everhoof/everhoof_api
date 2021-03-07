@@ -3,7 +3,9 @@ import { forwardRef, Inject } from '@nestjs/common';
 import { TracksService } from '@modules/tracks/tracks.service';
 import { Server, Socket } from 'socket.io';
 
-@WebSocketGateway()
+const WS_PORT = Number(process.env.WS_PORT) || undefined;
+
+@WebSocketGateway(WS_PORT)
 export class TracksGateway {
   constructor(
     @Inject(forwardRef(() => TracksService))
