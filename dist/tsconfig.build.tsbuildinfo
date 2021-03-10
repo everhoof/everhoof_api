@@ -3831,7 +3831,7 @@
         "signature": "b3ff3134c67428f788a561c98b6a720eb6ed39fe21882c1ef941ca078af5cbb8",
         "affectsGlobalScope": false
       },
-      "../node_modules/@types/ws/index.d.ts": {
+      "../node_modules/apollo-server-core/node_modules/@types/ws/index.d.ts": {
         "version": "75ce9fa40c86cf9a4f0a546958cc0e5104bf53e408e0f2b71c3757a610adb6b4",
         "signature": "75ce9fa40c86cf9a4f0a546958cc0e5104bf53e408e0f2b71c3757a610adb6b4",
         "affectsGlobalScope": false
@@ -3844,6 +3844,11 @@
       "../node_modules/subscriptions-transport-ws/dist/client.d.ts": {
         "version": "ff340522e12e154baf2d9ab80de0af51b77578e594a6592b1c45d910e1716a37",
         "signature": "ff340522e12e154baf2d9ab80de0af51b77578e594a6592b1c45d910e1716a37",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/ws/index.d.ts": {
+        "version": "c6e185824cae1ddea6706f4256d4bd499e8e9a37ed10689946c22984d68798c3",
+        "signature": "c6e185824cae1ddea6706f4256d4bd499e8e9a37ed10689946c22984d68798c3",
         "affectsGlobalScope": false
       },
       "../node_modules/subscriptions-transport-ws/dist/server.d.ts": {
@@ -6780,24 +6785,9 @@
         "signature": "4bc4c7612f5cc6298b01f76f7a21674181ae6e199a0b07c518107c15bde32344",
         "affectsGlobalScope": false
       },
-      "../node_modules/@types/engine.io/index.d.ts": {
-        "version": "854089953b8bdf60437d229c41544eb8fd374206b49f99647298ff7824f4932e",
-        "signature": "854089953b8bdf60437d229c41544eb8fd374206b49f99647298ff7824f4932e",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@types/socket.io-parser/index.d.ts": {
-        "version": "8487571622eefb9421499874014fa1cc0898bd15724565002a27b67d8e285072",
-        "signature": "8487571622eefb9421499874014fa1cc0898bd15724565002a27b67d8e285072",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@types/socket.io/index.d.ts": {
-        "version": "bed35c3ddd0ffc1a8e0fe9dcf83c7b2e0e2900de26405012aaf3724e8fd1a42d",
-        "signature": "bed35c3ddd0ffc1a8e0fe9dcf83c7b2e0e2900de26405012aaf3724e8fd1a42d",
-        "affectsGlobalScope": false
-      },
       "../src/modules/tracks/tracks.gateway.ts": {
-        "version": "0df2c95520ee6218b83739e3990a5ac2c286ade72fe93362cc46ebfab4efe142",
-        "signature": "e21e9d69906e6630591100eb220c594d677ad6419216a600a368cc9ee5a3dd2f",
+        "version": "e4b2b89108fb77b9d1c8d73354ae0f8f8b9f90cdc9ea58bd8c5bef8bdf331e73",
+        "signature": "69d08c926662aa935fc6d6421876685ad8179a9bfa3d708f3bf2dd873d353430",
         "affectsGlobalScope": false
       },
       "../src/modules/tracks/types/gateway.ts": {
@@ -9405,8 +9395,23 @@
         "signature": "11fb97a04761c17ea7102144b7f2b2c6de0f816ae4f568f0f73d9ee3a7a5c0cd",
         "affectsGlobalScope": true
       },
+      "../node_modules/@nestjs/platform-ws/adapters/ws-adapter.d.ts": {
+        "version": "08d314d9fca87cb94a3dd3d7ed9d7d01f9c9cab03fe0129246cd0688e8831b2b",
+        "signature": "08d314d9fca87cb94a3dd3d7ed9d7d01f9c9cab03fe0129246cd0688e8831b2b",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@nestjs/platform-ws/adapters/index.d.ts": {
+        "version": "6aac2c5ca00378e4d1421a03f614643dc1e9fd02279257cbf2e8e2a713b00907",
+        "signature": "6aac2c5ca00378e4d1421a03f614643dc1e9fd02279257cbf2e8e2a713b00907",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@nestjs/platform-ws/index.d.ts": {
+        "version": "62233ea74c1bf9917eb1ae257b912e7680e8aa7c373568eb075fc3e46e5c9d05",
+        "signature": "62233ea74c1bf9917eb1ae257b912e7680e8aa7c373568eb075fc3e46e5c9d05",
+        "affectsGlobalScope": false
+      },
       "../src/main.ts": {
-        "version": "44415f0f9bcbe04b79c691bc48f6e55999f532ef40d80a7129d7b82a6c62b4d4",
+        "version": "b30240d7df4f7842213a3cf851c801dde70a95414884a3883809a04eb8904fe2",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
@@ -13804,6 +13809,39 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts"
       ],
+      "../node_modules/@nestjs/platform-ws/adapters/index.d.ts": [
+        "../node_modules/@nestjs/platform-ws/adapters/ws-adapter.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../node_modules/@nestjs/platform-ws/adapters/ws-adapter.d.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/websockets/gateway-metadata-explorer.d.ts",
+        "../node_modules/@nestjs/websockets/index.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/rxjs/index.d.ts"
+      ],
+      "../node_modules/@nestjs/platform-ws/index.d.ts": [
+        "../node_modules/@nestjs/platform-ws/adapters/index.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts"
+      ],
       "../node_modules/@nestjs/schedule/dist/decorators/cron.decorator.d.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -14465,19 +14503,6 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/qs/index.d.ts",
         "../node_modules/@types/serve-static/index.d.ts"
-      ],
-      "../node_modules/@types/engine.io/index.d.ts": [
-        "../node_modules/@types/graceful-fs/index.d.ts",
-        "../node_modules/@types/node/events.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/http.d.ts",
-        "../node_modules/@types/node/net.d.ts",
-        "../node_modules/@types/node/process.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/process.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts",
-        "../node_modules/@types/node/ts3.7/index.d.ts",
-        "../node_modules/@types/node/util.d.ts"
       ],
       "../node_modules/@types/eslint-visitor-keys/index.d.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
@@ -16817,30 +16842,6 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts"
       ],
-      "../node_modules/@types/socket.io-parser/index.d.ts": [
-        "../node_modules/@types/graceful-fs/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/process.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/process.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts",
-        "../node_modules/@types/node/ts3.7/index.d.ts",
-        "../node_modules/@types/node/util.d.ts"
-      ],
-      "../node_modules/@types/socket.io/index.d.ts": [
-        "../node_modules/@types/engine.io/index.d.ts",
-        "../node_modules/@types/graceful-fs/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/http.d.ts",
-        "../node_modules/@types/node/https.d.ts",
-        "../node_modules/@types/node/process.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/process.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts",
-        "../node_modules/@types/node/ts3.7/index.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/socket.io-parser/index.d.ts"
-      ],
       "../node_modules/@types/source-list-map/index.d.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -16963,6 +16964,7 @@
         "../node_modules/@types/node/net.d.ts",
         "../node_modules/@types/node/process.d.ts",
         "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/tls.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/process.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
@@ -17533,11 +17535,11 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/ts3.7/index.d.ts",
         "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/ws/index.d.ts",
         "../node_modules/apollo-server-core/dist/graphqlOptions.d.ts",
         "../node_modules/apollo-server-core/dist/playground.d.ts",
         "../node_modules/apollo-server-core/dist/requestPipeline.d.ts",
         "../node_modules/apollo-server-core/dist/types.d.ts",
+        "../node_modules/apollo-server-core/node_modules/@types/ws/index.d.ts",
         "../node_modules/apollo-server-plugin-base/dist/index.d.ts",
         "../node_modules/apollo-server-types/dist/index.d.ts",
         "../node_modules/graphql/index.d.ts"
@@ -17659,18 +17661,35 @@
         "../node_modules/@types/node/ts3.2/process.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/ws/index.d.ts",
         "../node_modules/apollo-cache-control/dist/index.d.ts",
         "../node_modules/apollo-engine-reporting/dist/index.d.ts",
         "../node_modules/apollo-server-caching/dist/index.d.ts",
         "../node_modules/apollo-server-core/dist/graphqlOptions.d.ts",
         "../node_modules/apollo-server-core/dist/playground.d.ts",
+        "../node_modules/apollo-server-core/node_modules/@types/ws/index.d.ts",
         "../node_modules/apollo-server-core/node_modules/graphql-tools/dist/index.d.ts",
         "../node_modules/apollo-server-plugin-base/dist/index.d.ts",
         "../node_modules/apollo-server-types/dist/index.d.ts",
         "../node_modules/graphql-extensions/dist/index.d.ts",
         "../node_modules/graphql/index.d.ts",
         "../node_modules/subscriptions-transport-ws/dist/index.d.ts"
+      ],
+      "../node_modules/apollo-server-core/node_modules/@types/ws/index.d.ts": [
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/http.d.ts",
+        "../node_modules/@types/node/https.d.ts",
+        "../node_modules/@types/node/net.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/ts3.7/index.d.ts",
+        "../node_modules/@types/node/url.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/zlib.d.ts"
       ],
       "../node_modules/apollo-server-core/node_modules/graphql-tools/dist/Interfaces.d.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
@@ -32028,6 +32047,7 @@
       "../src/main.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/core/index.d.ts",
+        "../node_modules/@nestjs/platform-ws/index.d.ts",
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/process.d.ts",
@@ -32417,7 +32437,7 @@
         "../node_modules/@types/node/ts3.2/process.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/socket.io/index.d.ts",
+        "../node_modules/@types/ws/index.d.ts",
         "../src/modules/tracks/tracks.service.ts"
       ],
       "../src/modules/tracks/tracks.module.ts": [
@@ -36688,6 +36708,39 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts"
       ],
+      "../node_modules/@nestjs/platform-ws/adapters/index.d.ts": [
+        "../node_modules/@nestjs/platform-ws/adapters/ws-adapter.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../node_modules/@nestjs/platform-ws/adapters/ws-adapter.d.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/websockets/gateway-metadata-explorer.d.ts",
+        "../node_modules/@nestjs/websockets/index.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/rxjs/index.d.ts"
+      ],
+      "../node_modules/@nestjs/platform-ws/index.d.ts": [
+        "../node_modules/@nestjs/platform-ws/adapters/index.d.ts",
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/util.d.ts"
+      ],
       "../node_modules/@nestjs/schedule/dist/decorators/cron.decorator.d.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -37349,19 +37402,6 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/qs/index.d.ts",
         "../node_modules/@types/serve-static/index.d.ts"
-      ],
-      "../node_modules/@types/engine.io/index.d.ts": [
-        "../node_modules/@types/graceful-fs/index.d.ts",
-        "../node_modules/@types/node/events.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/http.d.ts",
-        "../node_modules/@types/node/net.d.ts",
-        "../node_modules/@types/node/process.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/process.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts",
-        "../node_modules/@types/node/ts3.7/index.d.ts",
-        "../node_modules/@types/node/util.d.ts"
       ],
       "../node_modules/@types/eslint-visitor-keys/index.d.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
@@ -39701,30 +39741,6 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts"
       ],
-      "../node_modules/@types/socket.io-parser/index.d.ts": [
-        "../node_modules/@types/graceful-fs/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/process.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/process.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts",
-        "../node_modules/@types/node/ts3.7/index.d.ts",
-        "../node_modules/@types/node/util.d.ts"
-      ],
-      "../node_modules/@types/socket.io/index.d.ts": [
-        "../node_modules/@types/engine.io/index.d.ts",
-        "../node_modules/@types/graceful-fs/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/http.d.ts",
-        "../node_modules/@types/node/https.d.ts",
-        "../node_modules/@types/node/process.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/process.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts",
-        "../node_modules/@types/node/ts3.7/index.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/socket.io-parser/index.d.ts"
-      ],
       "../node_modules/@types/source-list-map/index.d.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -39847,6 +39863,7 @@
         "../node_modules/@types/node/net.d.ts",
         "../node_modules/@types/node/process.d.ts",
         "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/tls.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/ts3.2/process.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
@@ -40417,11 +40434,11 @@
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/ts3.7/index.d.ts",
         "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/ws/index.d.ts",
         "../node_modules/apollo-server-core/dist/graphqlOptions.d.ts",
         "../node_modules/apollo-server-core/dist/playground.d.ts",
         "../node_modules/apollo-server-core/dist/requestPipeline.d.ts",
         "../node_modules/apollo-server-core/dist/types.d.ts",
+        "../node_modules/apollo-server-core/node_modules/@types/ws/index.d.ts",
         "../node_modules/apollo-server-plugin-base/dist/index.d.ts",
         "../node_modules/apollo-server-types/dist/index.d.ts",
         "../node_modules/graphql/index.d.ts"
@@ -40543,18 +40560,35 @@
         "../node_modules/@types/node/ts3.2/process.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts",
         "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/ws/index.d.ts",
         "../node_modules/apollo-cache-control/dist/index.d.ts",
         "../node_modules/apollo-engine-reporting/dist/index.d.ts",
         "../node_modules/apollo-server-caching/dist/index.d.ts",
         "../node_modules/apollo-server-core/dist/graphqlOptions.d.ts",
         "../node_modules/apollo-server-core/dist/playground.d.ts",
+        "../node_modules/apollo-server-core/node_modules/@types/ws/index.d.ts",
         "../node_modules/apollo-server-core/node_modules/graphql-tools/dist/index.d.ts",
         "../node_modules/apollo-server-plugin-base/dist/index.d.ts",
         "../node_modules/apollo-server-types/dist/index.d.ts",
         "../node_modules/graphql-extensions/dist/index.d.ts",
         "../node_modules/graphql/index.d.ts",
         "../node_modules/subscriptions-transport-ws/dist/index.d.ts"
+      ],
+      "../node_modules/apollo-server-core/node_modules/@types/ws/index.d.ts": [
+        "../node_modules/@types/graceful-fs/index.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/http.d.ts",
+        "../node_modules/@types/node/https.d.ts",
+        "../node_modules/@types/node/net.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/process.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts",
+        "../node_modules/@types/node/ts3.7/index.d.ts",
+        "../node_modules/@types/node/url.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/zlib.d.ts"
       ],
       "../node_modules/apollo-server-core/node_modules/graphql-tools/dist/Interfaces.d.ts": [
         "../node_modules/@types/graceful-fs/index.d.ts",
@@ -54809,7 +54843,7 @@
         "../src/modules/station/types/station.ts"
       ],
       "../src/modules/tracks/tracks.gateway.ts": [
-        "../node_modules/@types/socket.io/index.d.ts",
+        "../node_modules/@types/ws/index.d.ts",
         "../src/modules/tracks/tracks.service.ts"
       ],
       "../src/modules/tracks/tracks.resolver.ts": [

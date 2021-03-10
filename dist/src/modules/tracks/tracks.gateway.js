@@ -16,6 +16,7 @@ exports.TracksGateway = void 0;
 const websockets_1 = require("@nestjs/websockets");
 const common_1 = require("@nestjs/common");
 const tracks_service_1 = require("./tracks.service");
+const ws_1 = require("ws");
 let TracksGateway = class TracksGateway {
     constructor(tracksService) {
         this.tracksService = tracksService;
@@ -27,12 +28,20 @@ let TracksGateway = class TracksGateway {
         const track = this.tracksService.getGatewayTrack();
         if (!track)
             return;
-        (client !== null && client !== void 0 ? client : this.server).emit('current-track', this.tracksService.getGatewayTrack());
+        const data = JSON.stringify({ event: 'current-track', ...track });
+        if (client) {
+            client.send(data);
+        }
+        else {
+            this.server.clients.forEach((client) => {
+                client.send(data);
+            });
+        }
     }
 };
 __decorate([
     websockets_1.WebSocketServer(),
-    __metadata("design:type", Object)
+    __metadata("design:type", ws_1.Server)
 ], TracksGateway.prototype, "server", void 0);
 TracksGateway = __decorate([
     websockets_1.WebSocketGateway(5501),
