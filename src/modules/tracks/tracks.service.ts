@@ -31,6 +31,7 @@ export class TracksService {
 
   async getCurrentPlaying(): Promise<CurrentPlaying | undefined> {
     if (!this.currentPlaying) await this.updateCurrentPlaying();
+    else this.currentPlaying.timestamp = Date.now();
     return this.currentPlaying;
   }
 
