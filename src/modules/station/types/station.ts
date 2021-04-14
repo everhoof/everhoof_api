@@ -38,10 +38,10 @@ export class Mount {
   @Field(() => String)
   url: string;
 
-  @Field(() => Number)
+  @Field(() => Number, { nullable: true })
   bitrate: number;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   format: string;
 
   @Field(() => Listeners)
