@@ -16,10 +16,14 @@ export class CalendarEvent {
 
   @Field(() => Boolean)
   notify: boolean;
+
+  @Field(() => Boolean)
+  recording: boolean;
 }
 
 export interface CalendarEventParams {
   notify: boolean;
+  recording: boolean;
   preview: string;
 }
 
@@ -27,5 +31,11 @@ export class CalendarEventDto {
   summary: string;
   starts_at: string;
   ends_at: string;
+  preview: string;
+}
+
+export class RecordingCalendarEventDto {
+  name: string;
+  date: string;
   preview: string;
 }

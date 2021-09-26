@@ -3,7 +3,12 @@ import { calendar_v3, google } from 'googleapis';
 import Calendar = calendar_v3.Calendar;
 import { DateTime } from 'luxon';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { CalendarEvent, CalendarEventParams } from '@modules/calendar/types/calendar-event';
+import {
+  CalendarEvent,
+  CalendarEventDto,
+  CalendarEventParams,
+  RecordingCalendarEventDto,
+} from '@modules/calendar/types/calendar-event';
 
 @Injectable()
 export class CalendarService {
@@ -21,7 +26,7 @@ export class CalendarService {
   @Cron(CronExpression.EVERY_MINUTE)
   async updateCalendarEvents(): Promise<CalendarEvent | undefined> {
     const date = new Date();
-    date.setDate(date.getDate() - 1);
+    date.setDate(date.getDate() - 10 * 365);
 
     try {
       const events = await this.calendar.events.list({
@@ -55,9 +60,31 @@ export class CalendarService {
     return this.calendarEvents;
   }
 
+  async getRecordingCalendarEvents(): Promise<RecordingCalendarEventDto[]> {
+    return this.calendarEvents
+      .filter((event) => event.recording && event.endsAt <= Date.now())
+      .map((event) => ({
+        name: event.summary,
+        date: DateTime.fromMillis(event.startsAt).toFormat('yyyy-MM-dd'),
+        preview: event.preview,
+      }));
+  }
+
+  async getNextCalendarEvents(): Promise<CalendarEventDto[]> {
+    return this.calendarEvents
+      .filter((event) => event.startsAt >= Date.now() - 1000 * 60 * 60 * 24)
+      .map((event) => ({
+        summary: event.summary,
+        starts_at: DateTime.fromMillis(event.startsAt).toISO(),
+        ends_at: DateTime.fromMillis(event.endsAt).toISO(),
+        preview: event.preview,
+      }));
+  }
+
   private static parseParams(event: calendar_v3.Schema$Event): CalendarEventParams {
     const params: CalendarEventParams = {
       notify: true,
+      recording: true,
       preview: '',
     };
     const match = event.description?.match(/\[(.*)=(.*)]/gm);
@@ -69,6 +96,7 @@ export class CalendarService {
 
       switch (pair[0]) {
         case 'notify':
+        case 'recording':
           params[pair[0]] = pair[1] === 'true';
           break;
         default:

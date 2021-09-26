@@ -8,6 +8,7 @@ type CalendarEvent {
   endsAt: Float!
   preview: String!
   notify: Boolean!
+  recording: Boolean!
 }
 
 type CurrentPlaying {
@@ -63,8 +64,8 @@ type Mount {
   id: Float!
   name: String!
   url: String!
-  bitrate: Float!
-  format: String!
+  bitrate: Float
+  format: String
   listeners: Listeners!
 }
 
