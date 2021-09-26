@@ -87,7 +87,7 @@ export class CalendarService {
       recording: true,
       preview: '',
     };
-    const match = event.description?.match(/\[(.*)=(.*)]/gm);
+    const match = event.description?.match(/\[(.*?)=(.*?)]/gm);
     if (!match) return params;
 
     match.forEach((param) => {
