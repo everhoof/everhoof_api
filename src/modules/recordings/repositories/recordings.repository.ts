@@ -9,11 +9,13 @@ export class RecordingsRepository extends Repository<Recording> {
       where: { hide: false },
     });
   }
+
   getRecordings(): Promise<Recording[]> {
     return this.find({
       order: { date: 'DESC' },
     });
   }
+
   async addRecording(recording: Recording): Promise<void> {
     await this.save(recording);
   }
