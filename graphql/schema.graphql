@@ -64,6 +64,10 @@ type Mount {
   listeners: Listeners!
 }
 
+type Mutation {
+  processRecording(fileName: String!, date: String!, preview: String!, eventDescriptionShort: String!, eventDescriptionLong: String!): Boolean!
+}
+
 type Playlists {
   m3u: String!
   pls: String!
@@ -77,7 +81,19 @@ type Query {
   getCalendarEvents: [CalendarEvent!]!
   getStation: Station!
   getRecordings: [RecordingFile!]!
+  reloadRecordings: Boolean!
+  getPendingRecordings: [RecordEvent!]!
+  getBrokenRecordings: [RecordEvent!]!
+  getQueue: [RecordEvent!]!
   getHello: String!
+}
+
+type RecordEvent {
+  fileName: String!
+  date: String!
+  preview: String
+  eventDescriptionShort: String!
+  eventDescriptionLong: String
 }
 
 type RecordingFile {

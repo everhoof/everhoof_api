@@ -2,12 +2,11 @@ import { Module } from '@nestjs/common';
 import { RecordingsService } from '@modules/recordings/recordings.service';
 import { RecordingsResolver } from '@modules/recordings/recordings.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Recording } from './entities/recordings.entity';
+import { CalendarService } from '@modules/calendar/calendar.service';
+import { RecordingsRepository } from './repositories/recordings.repository';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Recording])
-  ],
-  providers: [RecordingsService, RecordingsResolver],
+  imports: [TypeOrmModule.forFeature([RecordingsRepository])],
+  providers: [RecordingsService, RecordingsResolver, CalendarService],
 })
-export class RecordingsModule { }
+export class RecordingsModule {}

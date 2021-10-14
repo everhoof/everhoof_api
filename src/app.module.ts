@@ -30,4 +30,4 @@ import { AppResolver } from './app.resolver';
   ],
   providers: [AppResolver],
 })
-export class AppModule { }
+export class AppModule {}
