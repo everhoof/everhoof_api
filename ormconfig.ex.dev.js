@@ -68,7 +68,7 @@ module.exports = [
     username,
     password,
     database,
-    schema:testSchema,
+    schema: testSchema,
     timezone: 'Z',
     dropSchema: true,
     synchronize: true,
