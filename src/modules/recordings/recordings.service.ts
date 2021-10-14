@@ -1,22 +1,50 @@
 import { Injectable } from '@nestjs/common';
 import got from 'got';
-import { Recording } from '@modules/recordings/types/recording';
+import { RecordingFile } from '@modules/recordings/types/recording';
+import { Recording } from './entities/recordings.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class RecordingsService {
-  private recordings: Recording[] = [];
 
-  async getRecordings(): Promise<Recording[]> {
-    await this.updateRecordings();
-    return this.recordings;
+  constructor(
+    @InjectRepository(Recording)
+    private readonly recordingsRepository: Repository<Recording>
+  ) { }
+
+  async getRecordings(): Promise<RecordingFile[]> {
+    const recordings = await this.recordingsRepository.find({
+      order: { date: "DESC" },
+      where: { hide: false }
+    });
+
+    return recordings.map<RecordingFile>(rec => ({
+      desc: rec.descriptionShort,
+      img: rec.preview,
+      name: rec.filename,
+      size: rec.filesize,
+      year: rec.date.slice(0, 4)
+    }));
   }
 
-  private async updateRecordings() {
-    try {
-      const recordings = await got(`${process.env.RECORDINGS_URL}`).json<Recording[]>();
-      this.recordings = recordings.reverse();
-    } catch (e) {
-      console.error(e);
-    }
+  async loadRecordingsFromLocalJson(): Promise<boolean> {
+    const recordingsRaw = await got(`${process.env.RECORDINGS_URL}`).json<RecordingFile[]>();
+
+    const recordings = recordingsRaw.map(rec => {
+      const parsedDate = new Date(rec.name.replace("_LF", "").slice(0, -4)).toString();
+
+      return this.recordingsRepository.create({
+        hide: false,
+        date: parsedDate, descriptionFull: "",
+        descriptionShort: rec.desc,
+        filename: rec.name,
+        filesize: rec.size,
+        preview: rec.img
+      });
+    });
+    this.recordingsRepository.save(recordings);
+    return true;
   }
+
 }

@@ -31,11 +31,6 @@ type CurrentPlayingTrack {
   art: String!
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type HistoryItem {
   id: Float!
   playedAt: Float!
@@ -69,29 +64,23 @@ type Mount {
   listeners: Listeners!
 }
 
-type Mutation {
-  signIn(email: String!, password: String!): Token!
-  signUp(email: String!, username: String, password: String!): User!
-}
-
 type Playlists {
   m3u: String!
   pls: String!
 }
 
 type Query {
-  getCurrentUser: User!
   getCurrentPlaying: CurrentPlaying
   getTracksHistory: [HistoryItem!]!
   searchTracks(page: Int = 1, count: Int = 10, q: String = ""): TrackSearchResponse!
   requestTrack(songId: String!): TrackRequestResponse!
   getCalendarEvents: [CalendarEvent!]!
   getStation: Station!
-  getRecordings: [Recording!]!
+  getRecordings: [RecordingFile!]!
   getHello: String!
 }
 
-type Recording {
+type RecordingFile {
   name: String!
   img: String!
   year: String!
@@ -110,15 +99,6 @@ type Station {
   public: Boolean!
   playlists: Playlists!
   mounts: [Mount!]!
-}
-
-type Token {
-  id: Int!
-  value: String!
-  ownerId: Int!
-  createdAt: DateTime!
-  expiresAt: DateTime
-  usedAt: DateTime
 }
 
 type Track {
@@ -146,13 +126,4 @@ type TrackSearchResponse {
   count: Int!
   total: Int!
   items: [TrackSearchItem!]!
-}
-
-type User {
-  id: Int!
-  email: String!
-  username: String
-  wasOnlineAt: DateTime
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }

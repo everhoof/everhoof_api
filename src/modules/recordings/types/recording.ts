@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class Recording {
+export class RecordingFile {
   @Field(() => String)
   name: string;
 
