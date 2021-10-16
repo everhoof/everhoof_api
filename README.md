@@ -19,14 +19,8 @@ yarn --frozen-lockfile --prod
 ```
 
 Update configs.
-
 ```bash
-cp ormconfig.ex.prod.js ormconfig.js
-nano ormconfig.js
-```
-
-```bash
-cp .env.example .env
+cp .env .env.local
 nano .env
 ```
 
@@ -36,14 +30,10 @@ Run migrations.
 yarn orm migrations:run
 ```
 
-```bash
-yarn seed:run
-```
-
 Use process manager to start the application.
 
 ```bash
-pm2 start yarn --name Everhoof_API -- start:prod
+pm2 start ecosystem.config.js
 pm2 save
 ```
 Application will start on 5500 port.

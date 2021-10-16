@@ -18,23 +18,18 @@
     "radio"
   ],
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "nest build",
+    "clean": "rimraf dist",
+    "start:prod": "cross-env NODE_ENV=production node -r ./env.js dist/main.js",
+    "start:dev": "cross-env NODE_ENV=development nest start --watch --exec \"node -r ./env.js -r ts-node/register -r tsconfig-paths/register ./src/main.ts\"",
+    "start:debug": "npm run start:dev -- --debug",
+    "prebuild": "npm run clean",
+    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "format": "prettier --write \"*.{ts,js,json}\" \"database/**/*.{ts,js,json}\" \"src/**/*.{ts,js,json}\" \"test/**/*.{ts,js,json}\"",
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/src/main",
     "lint": "eslint \"{src,database,scripts,test}/**/*.{ts,js}\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
-    "orm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -c cli",
-    "seed:create": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -c seed migration:create",
-    "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -c seed migration:run",
-    "seed:revert": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -c seed migration:revert",
+    "test": "jest --config=jest.config.js --notify",
+    "typeorm": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register -r ./env.js ./node_modules/typeorm/cli.js",
+    "typeorm:prod": "cross-env NODE_ENV=production node -r ./env.js ./node_modules/typeorm/cli.js",
+    "typeorm:test": "cross-env NODE_ENV=test ts-node -r tsconfig-paths/register -r ./env.js ./node_modules/typeorm/cli.js",
     "predeploy": "yarn build",
     "deploy": "node scripts/deploy.js"
   },
@@ -55,6 +50,8 @@
     "apollo-server-testing": "^2.15.1",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
+    "cross-env": "^7.0.3",
+    "dotenv-flow": "^3.2.0",
     "googleapis": "^59.0.0",
     "got": "^11.5.1",
     "graphql": "14.7.0",
@@ -97,7 +94,8 @@
     "prettier": "^2.0.5",
     "supertest": "^4.0.2",
     "ts-jest": "^26.1.2",
-    "ts-loader": "^8.0.0"
+    "ts-loader": "^8.0.0",
+    "tscpaths": "^0.0.9"
   },
   "jest": {
     "moduleFileExtensions": [

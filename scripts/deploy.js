@@ -6,13 +6,13 @@ ghpages.publish(
   {
     src: [
       'dist/**/*',
-      'resources/**/*',
-      'mail/**/*',
-      'ormconfig.ex.prod.js',
+      '.env',
+      'env.js',
+      'ormconfig.js',
       'package.json',
       'yarn.lock',
-      '.env.example',
       'tsconfig.json',
+      'tsconfig.build.json',
     ],
     branch: 'dist',
   },

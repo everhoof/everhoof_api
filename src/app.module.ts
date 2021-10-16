@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-import { TypeOrmConfigService } from '@config/typeorm';
+import { TypeOrmConfigService } from '@common/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TracksModule } from '@modules/tracks/tracks.module';
 import { CalendarModule } from '@modules/calendar/calendar.module';
@@ -17,6 +17,7 @@ import { AppResolver } from './app.resolver';
     GraphQLModule.forRoot({
       context: ({ req }) => ({ req }),
       debug: process.env.NODE_ENV !== 'production',
+      playground: process.env.NODE_ENV !== 'production',
       autoSchemaFile: join(process.cwd(), './graphql/schema.graphql'),
     }),
     TypeOrmModule.forRootAsync({
