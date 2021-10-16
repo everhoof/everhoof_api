@@ -3,7 +3,7 @@
 
 ## Requirements
 
-* Node 10
+* NodeJS >= 14.0.0
 
 ## Deploying
 

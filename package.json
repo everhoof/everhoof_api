@@ -10,6 +10,9 @@
     "email": "intelrug@gmail.com",
     "url": "https://github.com/intelrug"
   },
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "keywords": [
     "everhoof",
     "radio"
