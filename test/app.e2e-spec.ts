@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
 import supertest from 'supertest';
+import { WsAdapter } from '@nestjs/platform-ws';
 
 describe('App', () => {
   let app: INestApplication;
@@ -12,11 +13,12 @@ describe('App', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.useWebSocketAdapter(new WsAdapter(app));
     await app.init();
   });
 
   describe('Query getHello', () => {
-    it('should return query result', async () => {
+    it('should return query result', async (done) => {
       await supertest(app.getHttpServer())
         .post('/graphql')
         .send({
@@ -32,6 +34,8 @@ describe('App', () => {
         .expect((res) => {
           expect(res.body.data.getHello).toBe('Hello World!');
         });
+
+      done();
     });
   });
 

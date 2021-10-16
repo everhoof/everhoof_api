@@ -16,7 +16,7 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
-  testRegex: '/src/.*\\.(test|spec).(ts|tsx|js)$',
+  testRegex: '/test/.*\\.(e2e-spec).(ts|tsx|js)$',
   collectCoverageFrom: [
     'src/**/*.{js,jsx,tsx,ts}',
     '!**/node_modules/**',

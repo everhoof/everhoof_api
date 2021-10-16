@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   async createTypeOrmOptions(): Promise<TypeOrmModuleOptions> {
-    const options = await getConnectionOptions('test');
+    const options = await getConnectionOptions();
     return {
       ...options,
       autoLoadEntities: true,

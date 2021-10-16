@@ -27,6 +27,7 @@
     "format": "prettier --write \"*.{ts,js,json}\" \"database/**/*.{ts,js,json}\" \"src/**/*.{ts,js,json}\" \"test/**/*.{ts,js,json}\"",
     "lint": "eslint \"{src,database,scripts,test}/**/*.{ts,js}\" --fix",
     "test": "jest --config=jest.config.js --notify",
+    "test:e2e": "jest --config=jest-e2e.config.js --notify",
     "typeorm": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register -r ./env.js ./node_modules/typeorm/cli.js",
     "typeorm:prod": "cross-env NODE_ENV=production node -r ./env.js ./node_modules/typeorm/cli.js",
     "typeorm:test": "cross-env NODE_ENV=test ts-node -r tsconfig-paths/register -r ./env.js ./node_modules/typeorm/cli.js",
@@ -96,19 +97,5 @@
     "ts-jest": "^26.1.2",
     "ts-loader": "^8.0.0",
     "tscpaths": "^0.0.9"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".spec.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
   }
 }
