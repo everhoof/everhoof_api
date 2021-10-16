@@ -3,6 +3,7 @@ import { join } from 'path';
 import { TypeOrmConfigService } from '@common/typeorm';
 import { CalendarModule } from '@modules/calendar/calendar.module';
 import { RecordingsModule } from '@modules/recordings/recordings.module';
+import { SongVotesModule } from '@modules/song-votes/song-votes.module';
 import { StationModule } from '@modules/station/station.module';
 import { TracksModule } from '@modules/tracks/tracks.module';
 import { Module } from '@nestjs/common';
@@ -30,7 +31,8 @@ import { AppResolver } from './app.resolver';
     CalendarModule,
     StationModule,
     RecordingsModule,
+    SongVotesModule,
   ],
   providers: [AppResolver],
 })
-export class AppModule {}
+export class AppModule { }
