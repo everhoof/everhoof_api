@@ -25,6 +25,8 @@ export class CalendarService {
 
   @Cron(CronExpression.EVERY_MINUTE)
   async updateCalendarEvents(): Promise<CalendarEvent | undefined> {
+    if (!process.env.GOOGLE_API_KEY || !process.env.GOOGLE_CALENDAR_ID) return;
+
     const date = new Date();
     date.setDate(date.getDate() - 10 * 365);
 
