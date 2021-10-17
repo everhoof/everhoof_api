@@ -1,14 +1,9 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Track } from '@modules/tracks/types/track';
-
-@ObjectType()
-export class TrackSearchItem {
-  @Field(() => String)
-  requestId: string;
-
-  @Field(() => Track)
-  track: Track;
-}
+import { TrackSearchItem } from '@modules/tracks/types/track-search-item';
+import {
+  Field,
+  Int,
+  ObjectType,
+} from '@nestjs/graphql';
 
 @ObjectType()
 export class TrackSearchResponse {

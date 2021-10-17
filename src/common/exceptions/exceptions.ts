@@ -1,4 +1,8 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+// eslint-disable-next-line max-classes-per-file
+import {
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 
 export interface ExceptionMessage {
   en: string;
@@ -66,7 +70,9 @@ function createExceptionMessage(
 
 export class CustomHttpException extends HttpException {
   public readonly exception: keyof ExceptionKeys;
+
   public readonly lang: keyof ExceptionMessage;
+
   public readonly args: ExceptionArgs | undefined;
 
   constructor(

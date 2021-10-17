@@ -1,21 +1,35 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { readdir, stat } from 'fs/promises';
-import { RecordingCalendarEventDto } from '@modules/calendar/types/calendar-event';
-import { CalendarService } from '@modules/calendar/calendar.service';
-import { Recording } from '../entities/recordings.entity';
-import { DateTime } from 'luxon';
-import { RecordEvent } from '../types/record-event';
 import { spawn } from 'child_process';
+import {
+  readdir,
+  stat,
+} from 'fs/promises';
+
+import { CalendarService } from '@modules/calendar/calendar.service';
+import { RecordingCalendarEventDto } from '@modules/calendar/types/recording-calendar-event.dto';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { DateTime } from 'luxon';
+
+import { Recording } from '../entities/recordings.entity';
 import { RecordingsRepository } from '../repositories/recordings.repository';
+import { RecordEvent } from '../types/record-event';
 
 @Injectable()
 export class RecordingProcessingService {
   private azuraRecordings: string[] = [];
+
   private calendarEvents: RecordingCalendarEventDto[] = [];
+
   private uploadedRecords: Recording[] = [];
+
   private recordEvents: RecordEvent[] = [];
+
   private recordEventsBroken: RecordEvent[] = [];
+
   private recordEventsQueue: RecordEvent[] = [];
 
   constructor(
@@ -55,28 +69,28 @@ export class RecordingProcessingService {
     if (this.recordEventsQueue.length > 0) throw new BadRequestException('Processing queue is full, please wait');
 
     const ffmpeg = spawn(process.env.RECORD_PROCESSING_FFMPEG_PATH, [
-      `-hide_banner`,
-      `-loglevel`,
-      `quiet`,
-      `-threads`,
-      `1`,
-      `-i`,
+      '-hide_banner',
+      '-loglevel',
+      'quiet',
+      '-threads',
+      '1',
+      '-i',
       `${entry.fileName}`,
-      `-threads`,
-      `1`,
-      `-vn`,
-      `-acodec`,
-      `libvorbis`,
-      `-qscale:a`,
-      `6.2`,
-      `-y`,
+      '-threads',
+      '1',
+      '-vn',
+      '-acodec',
+      'libvorbis',
+      '-qscale:a',
+      '6.2',
+      '-y',
       `${process.env.RECORD_PROCESSING_OUTPUT_PATH}/${entry.date}.ogg`,
     ]);
 
     this.recordEventsQueue.push(entry);
 
     ffmpeg.on('close', async (code) => {
-      if (code == 0) {
+      if (code === 0) {
         const fstat = await stat(`${process.env.RECORD_PROCESSING_OUTPUT_PATH}/${entry.date}.ogg`);
 
         const newRec = this.recordingsRepository.create({
@@ -92,7 +106,7 @@ export class RecordingProcessingService {
         await this.recordingsRepository.addRecording(newRec);
         this.uploadedRecords.push(newRec);
       } else {
-        console.error(`ffmpeg exited with code ${code}`);
+        throw new InternalServerErrorException(`ffmpeg exited with code ${code}`);
       }
       this.recordEventsQueue.splice(this.recordEventsQueue.indexOf(entry));
     });
@@ -153,8 +167,7 @@ export class RecordingProcessingService {
         withFileTypes: true,
       });
       dirs2.forEach((file) => {
-        if (file.isFile())
-          this.azuraRecordings.push(`${process.env.RECORD_PROCESSING_AZURA_PATH}/${dirs[i].name}/${file.name}`);
+        if (file.isFile()) this.azuraRecordings.push(`${process.env.RECORD_PROCESSING_AZURA_PATH}/${dirs[i].name}/${file.name}`);
       });
     }
   }

@@ -1,41 +1,10 @@
-import { Field, Float, ObjectType } from '@nestjs/graphql';
-
-@ObjectType()
-export class Live {
-  @Field(() => Boolean)
-  isLive: boolean;
-  @Field(() => String)
-  streamerName: string;
-  @Field(() => Number)
-  broadcastStart: number;
-}
-
-@ObjectType()
-export class CurrentPlayingTrack {
-  @Field(() => String)
-  id: string;
-
-  @Field(() => String)
-  name: string;
-
-  @Field(() => String)
-  title: string;
-
-  @Field(() => String)
-  artist: string;
-
-  @Field(() => Number)
-  startsAt: number;
-
-  @Field(() => Number)
-  endsAt: number;
-
-  @Field(() => Number)
-  duration: number;
-
-  @Field(() => String)
-  art: string;
-}
+import { CurrentPlayingTrack } from '@modules/tracks/types/current-playing-track';
+import { Live } from '@modules/tracks/types/live';
+import {
+  Field,
+  Float,
+  ObjectType,
+} from '@nestjs/graphql';
 
 @ObjectType()
 export class CurrentPlaying {

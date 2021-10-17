@@ -1,6 +1,12 @@
-import { WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
-import { forwardRef, Inject } from '@nestjs/common';
 import { TracksService } from '@modules/tracks/tracks.service';
+import {
+  forwardRef,
+  Inject,
+} from '@nestjs/common';
+import {
+  WebSocketGateway,
+  WebSocketServer,
+} from '@nestjs/websockets';
 import { Server } from 'ws';
 
 @WebSocketGateway(5501)
@@ -24,8 +30,8 @@ export class TracksGateway {
     if (client) {
       client.send(data);
     } else {
-      this.server.clients.forEach((client) => {
-        client.send(data);
+      this.server.clients.forEach((c) => {
+        c.send(data);
       });
     }
   }

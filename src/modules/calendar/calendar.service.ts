@@ -1,18 +1,29 @@
-import { Injectable } from '@nestjs/common';
-import { calendar_v3, google } from 'googleapis';
-import Calendar = calendar_v3.Calendar;
-import { DateTime } from 'luxon';
-import { Cron, CronExpression } from '@nestjs/schedule';
 import {
   CalendarEvent,
-  CalendarEventDto,
   CalendarEventParams,
-  RecordingCalendarEventDto,
 } from '@modules/calendar/types/calendar-event';
+import { CalendarEventDto } from '@modules/calendar/types/calendar-event.dto';
+import { RecordingCalendarEventDto } from '@modules/calendar/types/recording-calendar-event.dto';
+import {
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
+import {
+  Cron,
+  CronExpression,
+} from '@nestjs/schedule';
+import {
+  calendar_v3,
+  google,
+} from 'googleapis';
+import { DateTime } from 'luxon';
+
+import Calendar = calendar_v3.Calendar;
 
 @Injectable()
 export class CalendarService {
   private readonly calendar: Calendar;
+
   private calendarEvents: CalendarEvent[] = [];
 
   constructor() {
@@ -20,7 +31,10 @@ export class CalendarService {
       version: 'v3',
       auth: process.env.GOOGLE_API_KEY,
     });
-    this.updateCalendarEvents().catch(console.error);
+    this.updateCalendarEvents()
+      .catch((e) => {
+        throw new InternalServerErrorException(e);
+      });
   }
 
   @Cron(CronExpression.EVERY_MINUTE)
@@ -46,15 +60,15 @@ export class CalendarService {
           const params = CalendarService.parseParams(event);
           acc.push({
             summary: event.summary,
-            startsAt: startsAt,
-            endsAt: endsAt,
+            startsAt,
+            endsAt,
             ...params,
           });
         }
         return acc;
       }, []);
     } catch (e) {
-      console.error(e);
+      throw new InternalServerErrorException(e);
     }
   }
 
@@ -93,16 +107,16 @@ export class CalendarService {
     if (!match) return params;
 
     match.forEach((param) => {
-      const pair = param.slice(1, -1).split('=');
-      params[pair[0]] = pair[1];
+      const [key, value] = param.slice(1, -1).split('=');
+      params[key] = value;
 
-      switch (pair[0]) {
+      switch (key) {
         case 'notify':
         case 'recording':
-          params[pair[0]] = pair[1] === 'true';
+          params[key] = value === 'true';
           break;
         default:
-          params[pair[0]] = pair[1];
+          params[key] = value;
           break;
       }
     });

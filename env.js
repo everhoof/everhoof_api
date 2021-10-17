@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const dotenvFlow = require('dotenv-flow');
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
+
+const dotenvFlow = require('dotenv-flow');
 
 function checkFileExistsSync(filepath) {
   let flag = true;

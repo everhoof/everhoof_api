@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
 import { RecordingFile } from '@modules/recordings/types/recording';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+
 import { RecordingsRepository } from '../repositories/recordings.repository';
 
 @Injectable()

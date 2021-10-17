@@ -1,11 +1,17 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { UseFilters } from '@nestjs/common';
-import { GraphqlExceptionFilter } from '@common/filters/http-exception.filter';
+import { GraphqlExceptionFilter } from '@common/filters/graphql-exception.filter';
 import { RecordingsService } from '@modules/recordings/services/recordings.service';
 import { RecordingFile } from '@modules/recordings/types/recording';
-import { RecordEvent } from './types/record-event';
+import { UseFilters } from '@nestjs/common';
+import {
+  Args,
+  Mutation,
+  Query,
+  Resolver,
+} from '@nestjs/graphql';
+
 import { RecordEventArgs } from './args/record-event.args';
 import { RecordingProcessingService } from './services/recording-processing.service';
+import { RecordEvent } from './types/record-event';
 
 @UseFilters(GraphqlExceptionFilter)
 @Resolver('Recordings')

@@ -4,24 +4,27 @@ import {
 } from '@nestjs/graphql';
 
 @ObjectType()
-export class Track {
+export class CurrentPlayingTrack {
   @Field(() => String)
   id: string;
 
   @Field(() => String)
-  text: string;
-
-  @Field(() => String)
-  artist: string;
+  name: string;
 
   @Field(() => String)
   title: string;
 
   @Field(() => String)
-  album: string;
+  artist: string;
 
-  @Field(() => String)
-  lyrics: string;
+  @Field(() => Number)
+  startsAt: number;
+
+  @Field(() => Number)
+  endsAt: number;
+
+  @Field(() => Number)
+  duration: number;
 
   @Field(() => String)
   art: string;

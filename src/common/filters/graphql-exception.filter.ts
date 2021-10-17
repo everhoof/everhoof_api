@@ -1,0 +1,19 @@
+import { CustomHttpException } from '@common/exceptions/exceptions';
+import {
+  Catch,
+  ArgumentsHost,
+} from '@nestjs/common';
+import {
+  GqlArgumentsHost,
+  GqlExceptionFilter,
+} from '@nestjs/graphql';
+
+@Catch(CustomHttpException)
+export class GraphqlExceptionFilter implements GqlExceptionFilter {
+  catch(exception: CustomHttpException, host: ArgumentsHost): CustomHttpException {
+    const gqlHost = GqlArgumentsHost.create(host);
+    const lang = gqlHost.getContext().req.query.lang || 'en';
+
+    return new CustomHttpException(exception.getStatus(), exception.exception, exception.args, lang);
+  }
+}

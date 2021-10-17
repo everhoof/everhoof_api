@@ -1,12 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import got, { Got } from 'got';
-import { Interval } from '@nestjs/schedule';
-import { Station } from '@modules/station/types/station';
 import { AzuracastStation } from '@modules/station/types/azuracast-station';
+import { Station } from '@modules/station/types/station';
+import {
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
+import { Interval } from '@nestjs/schedule';
+import got, { Got } from 'got';
 
 @Injectable()
 export class StationService {
   private readonly azuracastClient: Got;
+
   private station: Station;
 
   constructor() {
@@ -38,8 +42,8 @@ export class StationService {
         listenUrl: response?.listen_url || '',
         public: response?.is_public || true,
         playlists: {
-          m3u: `https://everhoof.ru/m3u`,
-          pls: `https://everhoof.ru/pls`,
+          m3u: 'https://everhoof.ru/m3u',
+          pls: 'https://everhoof.ru/pls',
         },
         mounts: (response?.mounts || []).map((mount) => ({
           id: mount.id,
@@ -57,8 +61,7 @@ export class StationService {
         })),
       };
     } catch (e) {
-      console.error(e);
-      return;
+      throw new InternalServerErrorException(e);
     }
   }
 }

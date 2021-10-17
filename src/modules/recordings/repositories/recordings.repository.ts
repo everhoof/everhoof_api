@@ -1,4 +1,8 @@
-import { EntityRepository, Repository } from 'typeorm';
+import {
+  EntityRepository,
+  Repository,
+} from 'typeorm';
+
 import { Recording } from '../entities/recordings.entity';
 
 @EntityRepository(Recording)

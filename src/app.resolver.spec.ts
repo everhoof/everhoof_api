@@ -1,4 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import {
+  Test,
+  TestingModule,
+} from '@nestjs/testing';
+
 import { AppResolver } from './app.resolver';
 
 describe('AppResolver', () => {

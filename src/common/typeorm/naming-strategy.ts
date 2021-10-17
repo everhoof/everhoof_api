@@ -1,5 +1,9 @@
 /* eslint-disable class-methods-use-this,max-len,@typescript-eslint/no-unused-vars */
-import { DefaultNamingStrategy, NamingStrategyInterface, Table } from 'typeorm';
+import {
+  DefaultNamingStrategy,
+  NamingStrategyInterface,
+  Table,
+} from 'typeorm';
 
 function generate(tableOrName: Table | string, columnNames: string[], suffix = '') {
   const tableName = typeof tableOrName === 'string' ? tableOrName : tableOrName.name;

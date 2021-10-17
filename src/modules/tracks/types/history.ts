@@ -1,5 +1,8 @@
-import { Field, ObjectType } from '@nestjs/graphql';
 import { Track } from '@modules/tracks/types/track';
+import {
+  Field,
+  ObjectType,
+} from '@nestjs/graphql';
 
 @ObjectType()
 export class HistoryItem {

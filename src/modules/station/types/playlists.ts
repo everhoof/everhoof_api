@@ -4,10 +4,10 @@ import {
 } from '@nestjs/graphql';
 
 @ObjectType()
-export class TrackRequestResponse {
-  @Field(() => Boolean)
-  success: boolean;
+export class Playlists {
+  @Field(() => String)
+  m3u: string;
 
   @Field(() => String)
-  message: string;
+  pls: string;
 }

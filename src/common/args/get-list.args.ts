@@ -1,5 +1,14 @@
-import { ArgsType, Field, Int } from '@nestjs/graphql';
-import { IsInt, IsOptional, Max, Min } from 'class-validator';
+import {
+  ArgsType,
+  Field,
+  Int,
+} from '@nestjs/graphql';
+import {
+  IsInt,
+  IsOptional,
+  Max,
+  Min,
+} from 'class-validator';
 
 @ArgsType()
 export class GetListArgs {

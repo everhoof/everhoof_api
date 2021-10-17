@@ -8,7 +8,7 @@ export interface AzuracastStation {
   listen_url: string;
   is_public: boolean;
   mounts: Mount[];
-  remotes: any[];
+  remotes: unknown[];
 }
 
 export interface Mount {

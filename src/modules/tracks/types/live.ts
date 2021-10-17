@@ -4,10 +4,13 @@ import {
 } from '@nestjs/graphql';
 
 @ObjectType()
-export class TrackRequestResponse {
+export class Live {
   @Field(() => Boolean)
-  success: boolean;
+  isLive: boolean;
 
   @Field(() => String)
-  message: string;
+  streamerName: string;
+
+  @Field(() => Number)
+  broadcastStart: number;
 }

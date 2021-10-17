@@ -1,22 +1,32 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import got, { Got } from 'got';
-import { CurrentPlaying } from '@modules/tracks/types/current-playing';
-import { Interval } from '@nestjs/schedule';
-import { AzuracastNowPlaying } from '@modules/tracks/types/azuracast-nowplaying';
-import { HistoryItem } from '@modules/tracks/types/history';
-import { AzuracastRequestResponse, AzuracastRequests } from '@modules/tracks/types/azuracast-requests';
-import { TrackSearchResponse } from '@modules/tracks/types/track-search-response';
-import { TrackSearchArgs } from '@modules/tracks/args/track-search.args';
 import { TrackRequestArgs } from '@modules/tracks/args/track-request.args';
-import { TrackRequestResponse } from '@modules/tracks/types/track-request-response';
+import { TrackSearchArgs } from '@modules/tracks/args/track-search.args';
 import { TracksGateway } from '@modules/tracks/tracks.gateway';
+import { AzuracastNowPlaying } from '@modules/tracks/types/azuracast-nowplaying';
+import {
+  AzuracastRequestResponse,
+  AzuracastRequests,
+} from '@modules/tracks/types/azuracast-requests';
+import { CurrentPlaying } from '@modules/tracks/types/current-playing';
 import { GatewayTrack } from '@modules/tracks/types/gateway';
+import { HistoryItem } from '@modules/tracks/types/history';
+import { TrackRequestResponse } from '@modules/tracks/types/track-request-response';
+import { TrackSearchResponse } from '@modules/tracks/types/track-search-response';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
+import { Interval } from '@nestjs/schedule';
+import got, { Got } from 'got';
 import { DateTime } from 'luxon';
 
 @Injectable()
 export class TracksService {
   private readonly azuracastClient: Got;
+
   private currentPlaying?: CurrentPlaying;
+
   private tracksHistory: HistoryItem[] = [];
 
   constructor(
@@ -48,13 +58,14 @@ export class TracksService {
         searchPhrase: trackSearchArgs.q,
       },
     }).json<AzuracastRequests>();
-    if (!response)
+    if (!response) {
       return {
         page: 1,
         count: 0,
         total: 0,
         items: [],
       };
+    }
 
     return {
       page: response.current,
@@ -122,7 +133,9 @@ export class TracksService {
         art = art.replace(process.env.AZURACAST_PUBLIC_URL, process.env.AZURACAST_REAL_PUBLIC_URL);
       }
 
-      currentPlaying.current = { id, title, artist, name, duration, startsAt, endsAt, art };
+      currentPlaying.current = {
+        id, title, artist, name, duration, startsAt, endsAt, art,
+      };
 
       id = response.playing_next?.song.id || '';
       title = response.playing_next?.song.title || '';
@@ -137,7 +150,9 @@ export class TracksService {
         art = art.replace(process.env.AZURACAST_PUBLIC_URL, process.env.AZURACAST_REAL_PUBLIC_URL);
       }
 
-      currentPlaying.next = { id, title, artist, name, duration, startsAt, endsAt, art };
+      currentPlaying.next = {
+        id, title, artist, name, duration, startsAt, endsAt, art,
+      };
 
       id = response.song_history[0].song.id || '';
       title = response.song_history[0].song.title || '';
@@ -152,7 +167,9 @@ export class TracksService {
         art = art.replace(process.env.AZURACAST_PUBLIC_URL, process.env.AZURACAST_REAL_PUBLIC_URL);
       }
 
-      currentPlaying.previous = { id, title, artist, name, duration, startsAt, endsAt, art };
+      currentPlaying.previous = {
+        id, title, artist, name, duration, startsAt, endsAt, art,
+      };
 
       currentPlaying.live = {
         isLive: response.live?.is_live || false,
@@ -192,8 +209,7 @@ export class TracksService {
         },
       }));
     } catch (e) {
-      console.error(e);
-      return;
+      throw new InternalServerErrorException(e);
     }
   }
 

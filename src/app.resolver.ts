@@ -1,6 +1,9 @@
-import { Query, Resolver } from '@nestjs/graphql';
+import { GraphqlExceptionFilter } from '@common/filters/graphql-exception.filter';
 import { UseFilters } from '@nestjs/common';
-import { GraphqlExceptionFilter } from '@common/filters/http-exception.filter';
+import {
+  Query,
+  Resolver,
+} from '@nestjs/graphql';
 
 @UseFilters(GraphqlExceptionFilter)
 @Resolver('App')

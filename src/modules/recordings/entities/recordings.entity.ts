@@ -1,5 +1,13 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import {
+  Field,
+  Int,
+  ObjectType,
+} from '@nestjs/graphql';
+import {
+  Column,
+  Entity,
+  PrimaryColumn,
+} from 'typeorm';
 
 @ObjectType()
 @Entity('recordings')

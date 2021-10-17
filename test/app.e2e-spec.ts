@@ -1,8 +1,12 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import { AppModule } from '../src/app.module';
-import supertest from 'supertest';
 import { WsAdapter } from '@nestjs/platform-ws';
+import {
+  Test,
+  TestingModule,
+} from '@nestjs/testing';
+import supertest from 'supertest';
+
+import { AppModule } from '../src/app.module';
 
 describe('App', () => {
   let app: INestApplication;

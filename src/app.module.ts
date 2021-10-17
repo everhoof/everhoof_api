@@ -1,14 +1,16 @@
+import { join } from 'path';
+
+import { TypeOrmConfigService } from '@common/typeorm';
+import { CalendarModule } from '@modules/calendar/calendar.module';
+import { RecordingsModule } from '@modules/recordings/recordings.module';
+import { StationModule } from '@modules/station/station.module';
+import { TracksModule } from '@modules/tracks/tracks.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
-import { join } from 'path';
-import { TypeOrmConfigService } from '@common/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';
-import { TracksModule } from '@modules/tracks/tracks.module';
-import { CalendarModule } from '@modules/calendar/calendar.module';
-import { StationModule } from '@modules/station/station.module';
-import { RecordingsModule } from '@modules/recordings/recordings.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { AppResolver } from './app.resolver';
 
 @Module({

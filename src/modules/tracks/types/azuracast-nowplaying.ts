@@ -25,13 +25,13 @@ export interface Station {
   listen_url: string;
   is_public: boolean;
   mounts: Mount[];
-  remotes: any[];
+  remotes: unknown[];
 }
 
 export interface Live {
   is_live: boolean;
   streamer_name: string;
-  broadcast_start?: any;
+  broadcast_start?: number;
 }
 
 export interface Song {
