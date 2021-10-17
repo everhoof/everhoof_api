@@ -1,16 +1,3 @@
-import { TrackRequestArgs } from '@modules/tracks/args/track-request.args';
-import { TrackSearchArgs } from '@modules/tracks/args/track-search.args';
-import { TracksGateway } from '@modules/tracks/tracks.gateway';
-import { AzuracastNowPlaying } from '@modules/tracks/types/azuracast-nowplaying';
-import {
-  AzuracastRequestResponse,
-  AzuracastRequests,
-} from '@modules/tracks/types/azuracast-requests';
-import { CurrentPlaying } from '@modules/tracks/types/current-playing';
-import { GatewayTrack } from '@modules/tracks/types/gateway';
-import { HistoryItem } from '@modules/tracks/types/history';
-import { TrackRequestResponse } from '@modules/tracks/types/track-request-response';
-import { TrackSearchResponse } from '@modules/tracks/types/track-search-response';
 import {
   forwardRef,
   Inject,
@@ -20,6 +7,20 @@ import {
 import { Interval } from '@nestjs/schedule';
 import got, { Got } from 'got';
 import { DateTime } from 'luxon';
+
+import { TrackRequestArgs } from '~/modules/tracks/args/track-request.args';
+import { TrackSearchArgs } from '~/modules/tracks/args/track-search.args';
+import { TracksGateway } from '~/modules/tracks/tracks.gateway';
+import { AzuracastNowPlaying } from '~/modules/tracks/types/azuracast-nowplaying';
+import {
+  AzuracastRequestResponse,
+  AzuracastRequests,
+} from '~/modules/tracks/types/azuracast-requests';
+import { CurrentPlaying } from '~/modules/tracks/types/current-playing';
+import { GatewayTrack } from '~/modules/tracks/types/gateway';
+import { HistoryItem } from '~/modules/tracks/types/history';
+import { TrackRequestResponse } from '~/modules/tracks/types/track-request-response';
+import { TrackSearchResponse } from '~/modules/tracks/types/track-search-response';
 
 @Injectable()
 export class TracksService {

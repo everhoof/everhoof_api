@@ -1,5 +1,3 @@
-import { Ip } from '@common/decorators/ip.decorator';
-import { GraphqlExceptionFilter } from '@common/filters/graphql-exception.filter';
 import {
   ForbiddenException,
   UseFilters,
@@ -9,6 +7,9 @@ import {
   Mutation,
   Resolver,
 } from '@nestjs/graphql';
+
+import { Ip } from '~/common/decorators/ip.decorator';
+import { GraphqlExceptionFilter } from '~/common/filters/graphql-exception.filter';
 
 import { VoteArgs } from './args/vote.args';
 import { SongVotesService } from './song-votes.service';

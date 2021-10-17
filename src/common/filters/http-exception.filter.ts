@@ -1,8 +1,4 @@
 import {
-  CustomHttpException,
-  ExceptionMessage,
-} from '@common/exceptions/exceptions';
-import {
   Catch,
   ArgumentsHost,
   ExceptionFilter,
@@ -11,6 +7,11 @@ import {
   Request,
   Response,
 } from 'express';
+
+import {
+  CustomHttpException,
+  ExceptionMessage,
+} from '~/common/exceptions/exceptions';
 
 @Catch(CustomHttpException)
 export class HttpExceptionFilter implements ExceptionFilter {

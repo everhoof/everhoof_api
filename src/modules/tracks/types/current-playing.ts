@@ -1,10 +1,11 @@
-import { CurrentPlayingTrack } from '@modules/tracks/types/current-playing-track';
-import { Live } from '@modules/tracks/types/live';
 import {
   Field,
   Float,
   ObjectType,
 } from '@nestjs/graphql';
+
+import { CurrentPlayingTrack } from '~/modules/tracks/types/current-playing-track';
+import { Live } from '~/modules/tracks/types/live';
 
 @ObjectType()
 export class CurrentPlaying {

@@ -1,9 +1,10 @@
-import { Mount } from '@modules/station/types/mount';
-import { Playlists } from '@modules/station/types/playlists';
 import {
   Field,
   ObjectType,
 } from '@nestjs/graphql';
+
+import { Mount } from '~/modules/station/types/mount';
+import { Playlists } from '~/modules/station/types/playlists';
 
 @ObjectType()
 export class Station {

@@ -1,4 +1,3 @@
-import { TracksService } from '@modules/tracks/tracks.service';
 import {
   forwardRef,
   Inject,
@@ -8,6 +7,8 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server } from 'ws';
+
+import { TracksService } from '~/modules/tracks/tracks.service';
 
 @WebSocketGateway(5501)
 export class TracksGateway {

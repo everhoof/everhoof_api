@@ -1,11 +1,12 @@
-import { GraphqlExceptionFilter } from '@common/filters/graphql-exception.filter';
-import { StationService } from '@modules/station/station.service';
-import { Station } from '@modules/station/types/station';
 import { UseFilters } from '@nestjs/common';
 import {
   Query,
   Resolver,
 } from '@nestjs/graphql';
+
+import { GraphqlExceptionFilter } from '~/common/filters/graphql-exception.filter';
+import { StationService } from '~/modules/station/station.service';
+import { Station } from '~/modules/station/types/station';
 
 @UseFilters(GraphqlExceptionFilter)
 @Resolver('Station')

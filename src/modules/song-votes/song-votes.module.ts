@@ -1,6 +1,7 @@
-import { TracksModule } from '@modules/tracks/tracks.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { TracksModule } from '~/modules/tracks/tracks.module';
 
 import { AzuraSongsRepository } from './repositories/azura-songs.repository';
 import { SongVotesRepository } from './repositories/song-votes.repository';

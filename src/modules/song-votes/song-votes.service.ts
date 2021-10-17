@@ -1,6 +1,7 @@
-import { TracksService } from '@modules/tracks/tracks.service';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+
+import { TracksService } from '~/modules/tracks/tracks.service';
 
 import { VoteArgs } from './args/vote.args';
 import { AzuraSongsRepository } from './repositories/azura-songs.repository';

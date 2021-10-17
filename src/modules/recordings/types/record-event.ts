@@ -1,8 +1,9 @@
-import { RecordingCalendarEventDto } from '@modules/calendar/types/recording-calendar-event.dto';
 import {
   Field,
   ObjectType,
 } from '@nestjs/graphql';
+
+import { RecordingCalendarEventDto } from '~/modules/calendar/types/recording-calendar-event.dto';
 
 @ObjectType()
 export class RecordEvent {

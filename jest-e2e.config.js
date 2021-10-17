@@ -3,9 +3,7 @@ require('./environment');
 module.exports = {
   testTimeout: 30000,
   moduleNameMapper: {
-    '^@common(.*)$': '<rootDir>/src/common$1',
-    '^@config(.*)$': '<rootDir>/src/config$1',
-    '^@modules(.*)$': '<rootDir>/src/modules$1',
+    '^~(.*)$': '<rootDir>/src$1',
   },
   moduleFileExtensions: [
     'ts',

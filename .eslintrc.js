@@ -49,6 +49,13 @@ module.exports = {
     'modules-newline/export-declaration-newline': 'error',
 
     'import/order': ['error', {
+      groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+      pathGroups: [
+        {
+          pattern: '~/**',
+          group: 'internal',
+        },
+      ],
       'newlines-between': 'always',
       alphabetize: {
         order: 'asc',

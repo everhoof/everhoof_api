@@ -1,11 +1,12 @@
-import { GraphqlExceptionFilter } from '@common/filters/graphql-exception.filter';
-import { CalendarService } from '@modules/calendar/calendar.service';
-import { CalendarEvent } from '@modules/calendar/types/calendar-event';
 import { UseFilters } from '@nestjs/common';
 import {
   Query,
   Resolver,
 } from '@nestjs/graphql';
+
+import { GraphqlExceptionFilter } from '~/common/filters/graphql-exception.filter';
+import { CalendarService } from '~/modules/calendar/calendar.service';
+import { CalendarEvent } from '~/modules/calendar/types/calendar-event';
 
 @UseFilters(GraphqlExceptionFilter)
 @Resolver('Calendar')

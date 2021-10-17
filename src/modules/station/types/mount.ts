@@ -1,8 +1,9 @@
-import { Listeners } from '@modules/station/types/listeners';
 import {
   Field,
   ObjectType,
 } from '@nestjs/graphql';
+
+import { Listeners } from '~/modules/station/types/listeners';
 
 @ObjectType()
 export class Mount {

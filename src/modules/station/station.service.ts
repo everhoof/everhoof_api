@@ -1,11 +1,12 @@
-import { AzuracastStation } from '@modules/station/types/azuracast-station';
-import { Station } from '@modules/station/types/station';
 import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
 import { Interval } from '@nestjs/schedule';
 import got, { Got } from 'got';
+
+import { AzuracastStation } from '~/modules/station/types/azuracast-station';
+import { Station } from '~/modules/station/types/station';
 
 @Injectable()
 export class StationService {

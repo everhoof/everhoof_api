@@ -1,10 +1,4 @@
 import {
-  CalendarEvent,
-  CalendarEventParameters,
-} from '@modules/calendar/types/calendar-event';
-import { CalendarEventDto } from '@modules/calendar/types/calendar-event.dto';
-import { RecordingCalendarEventDto } from '@modules/calendar/types/recording-calendar-event.dto';
-import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
@@ -17,6 +11,13 @@ import {
   google,
 } from 'googleapis';
 import { DateTime } from 'luxon';
+
+import {
+  CalendarEvent,
+  CalendarEventParameters,
+} from '~/modules/calendar/types/calendar-event';
+import { CalendarEventDto } from '~/modules/calendar/types/calendar-event.dto';
+import { RecordingCalendarEventDto } from '~/modules/calendar/types/recording-calendar-event.dto';
 
 import Calendar = calendar_v3.Calendar;
 

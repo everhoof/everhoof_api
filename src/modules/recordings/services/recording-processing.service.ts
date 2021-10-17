@@ -4,8 +4,6 @@ import {
   stat,
 } from 'fs/promises';
 
-import { CalendarService } from '@modules/calendar/calendar.service';
-import { RecordingCalendarEventDto } from '@modules/calendar/types/recording-calendar-event.dto';
 import {
   BadRequestException,
   Injectable,
@@ -13,6 +11,9 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DateTime } from 'luxon';
+
+import { CalendarService } from '~/modules/calendar/calendar.service';
+import { RecordingCalendarEventDto } from '~/modules/calendar/types/recording-calendar-event.dto';
 
 import { Recording } from '../entities/recordings.entity';
 import { RecordingsRepository } from '../repositories/recordings.repository';
