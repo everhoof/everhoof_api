@@ -5,5 +5,6 @@ import { Module } from '@nestjs/common';
 
 @Module({
   providers: [TracksService, TracksResolver, TracksGateway],
+  exports: [TracksGateway, TracksService],
 })
-export class TracksModule {}
+export class TracksModule { }

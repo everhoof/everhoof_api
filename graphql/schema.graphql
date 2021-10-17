@@ -66,6 +66,7 @@ type Mount {
 
 type Mutation {
   processRecording(fileName: String!, date: String!, preview: String!, eventDescriptionShort: String!, eventDescriptionLong: String!): Boolean!
+  voteForNowPlaying(rating: Float!): Boolean!
 }
 
 type Playlists {
