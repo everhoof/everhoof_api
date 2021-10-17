@@ -4,7 +4,9 @@ import {
   Table,
 } from 'typeorm';
 
-export class CreateSongVotesTable1634294256668 implements MigrationInterface {
+export class CreateSongVotesTable implements MigrationInterface {
+  name = 'CreateSongVotesTable1634294256668';
+
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({

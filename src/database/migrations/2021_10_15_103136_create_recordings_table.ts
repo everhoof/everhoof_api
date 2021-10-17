@@ -4,7 +4,9 @@ import {
   Table,
 } from 'typeorm';
 
-export class CreateRecordingsTable1634210009174 implements MigrationInterface {
+export class CreateRecordingsTable implements MigrationInterface {
+  name = 'CreateRecordingsTable1634210009174';
+
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({

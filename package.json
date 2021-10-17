@@ -33,7 +33,10 @@
     "typeorm:test": "cross-env NODE_ENV=test ts-node -r tsconfig-paths/register -r ./environment.js ./node_modules/typeorm/cli.js",
     "predeploy": "yarn build",
     "deploy": "node scripts/deploy.js",
-    "module": "node scripts/module.js"
+    "module": "node scripts/module.js",
+    "migrate": "yarn typeorm migration:run",
+    "migrate:rollback": "yarn typeorm migration:revert",
+    "make:migration": "node scripts/make-migration.js"
   },
   "dependencies": {
     "@nestjs/common": "^7.3.2",
