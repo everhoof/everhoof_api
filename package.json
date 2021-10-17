@@ -32,7 +32,8 @@
     "typeorm:prod": "cross-env NODE_ENV=production node -r ./environment.js ./node_modules/typeorm/cli.js",
     "typeorm:test": "cross-env NODE_ENV=test ts-node -r tsconfig-paths/register -r ./environment.js ./node_modules/typeorm/cli.js",
     "predeploy": "yarn build",
-    "deploy": "node scripts/deploy.js"
+    "deploy": "node scripts/deploy.js",
+    "module": "node scripts/module.js"
   },
   "dependencies": {
     "@nestjs/common": "^7.3.2",
@@ -81,6 +82,7 @@
     "@nestjs/testing": "^7.3.2",
     "@types/express": "^4.17.7",
     "@types/jest": "^26.0.4",
+    "@types/klaw": "^3.0.2",
     "@types/luxon": "^1.25.0",
     "@types/node": "^14.0.23",
     "@types/passport-http-bearer": "^1.0.35",
@@ -94,8 +96,11 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-modules-newline": "^0.0.6",
     "eslint-plugin-unicorn": "^30.0.0",
+    "fs-extra": "^10.0.0",
     "gh-pages": "^3.1.0",
     "jest": "^26.1.0",
+    "klaw": "^4.0.1",
+    "pluralize": "^8.0.0",
     "supertest": "^4.0.2",
     "ts-jest": "^26.1.2",
     "ts-loader": "^8.0.0",
