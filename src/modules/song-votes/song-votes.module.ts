@@ -11,4 +11,4 @@ import { SongVotesService } from './song-votes.service';
   imports: [TypeOrmModule.forFeature([AzuraSongsRepository, SongVotesRepository]), TracksModule],
   providers: [SongVotesService, SongVotesResolver],
 })
-export class SongVotesModule { }
+export class SongVotesModule {}

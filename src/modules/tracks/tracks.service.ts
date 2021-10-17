@@ -101,10 +101,10 @@ export class TracksService {
         success: response.success,
         message: response.message,
       };
-    } catch (e) {
+    } catch (error) {
       return {
-        success: e.response.body.success,
-        message: e.response.body.message,
+        success: error.response.body.success,
+        message: error.response.body.message,
       };
     }
   }
@@ -208,8 +208,8 @@ export class TracksService {
           ),
         },
       }));
-    } catch (e) {
-      throw new InternalServerErrorException(e);
+    } catch (error) {
+      throw new InternalServerErrorException(error);
     }
   }
 

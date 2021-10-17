@@ -1,4 +1,4 @@
-require('./env');
+require('./environment');
 
 module.exports = {
   testTimeout: 30000,

@@ -25,7 +25,7 @@ export class CalendarEvent {
   recording: boolean;
 }
 
-export interface CalendarEventParams {
+export interface CalendarEventParameters {
   notify: boolean;
   recording: boolean;
   preview: string;

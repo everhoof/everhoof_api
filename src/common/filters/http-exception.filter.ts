@@ -15,9 +15,9 @@ import {
 @Catch(CustomHttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: CustomHttpException, host: ArgumentsHost): void {
-    const ctx = host.switchToHttp();
-    const response = ctx.getResponse<Response>();
-    const request = ctx.getRequest<Request>();
+    const context = host.switchToHttp();
+    const response = context.getResponse<Response>();
+    const request = context.getRequest<Request>();
     const status = exception.getStatus();
     const lang: keyof ExceptionMessage = (request.query.lang as keyof ExceptionMessage) || 'en';
 

@@ -61,7 +61,7 @@ function createExceptionMessage(
   if (exceptions[exception] && exceptions[exception][lang]) {
     const message = exceptions[exception][lang];
     if (args) {
-      return Object.keys(args).reduce((acc, key) => acc.replace(new RegExp(`/%${key}%/`), args[key]), message);
+      return Object.keys(args).reduce((accumulator, key) => accumulator.replace(new RegExp(`/%${key}%/`), args[key]), message);
     }
     return message;
   }

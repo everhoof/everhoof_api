@@ -1,4 +1,4 @@
-import { join } from 'path';
+import path from 'path';
 
 import { TypeOrmConfigService } from '@common/typeorm';
 import { CalendarModule } from '@modules/calendar/calendar.module';
@@ -21,7 +21,7 @@ import { AppResolver } from './app.resolver';
       context: ({ req }) => ({ req }),
       debug: process.env.NODE_ENV !== 'production',
       playground: process.env.NODE_ENV !== 'production',
-      autoSchemaFile: join(process.cwd(), './graphql/schema.graphql'),
+      autoSchemaFile: path.join(process.cwd(), './graphql/schema.graphql'),
     }),
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,
@@ -35,4 +35,4 @@ import { AppResolver } from './app.resolver';
   ],
   providers: [AppResolver],
 })
-export class AppModule { }
+export class AppModule {}

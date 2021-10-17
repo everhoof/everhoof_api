@@ -18,7 +18,7 @@ import { SongVotesService } from './song-votes.service';
 export class SongVotesResolver {
   constructor(
     private readonly songVoteService: SongVotesService,
-  ) { }
+  ) {}
 
   @Mutation(() => Boolean)
   async voteForNowPlaying(@Args() args: VoteArgs, @Ip() ip?: string): Promise<boolean> {

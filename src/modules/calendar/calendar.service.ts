@@ -1,6 +1,6 @@
 import {
   CalendarEvent,
-  CalendarEventParams,
+  CalendarEventParameters,
 } from '@modules/calendar/types/calendar-event';
 import { CalendarEventDto } from '@modules/calendar/types/calendar-event.dto';
 import { RecordingCalendarEventDto } from '@modules/calendar/types/recording-calendar-event.dto';
@@ -32,8 +32,8 @@ export class CalendarService {
       auth: process.env.GOOGLE_API_KEY,
     });
     this.updateCalendarEvents()
-      .catch((e) => {
-        throw new InternalServerErrorException(e);
+      .catch((error) => {
+        throw new InternalServerErrorException(error);
       });
   }
 
@@ -53,22 +53,22 @@ export class CalendarService {
       });
 
       if (!events.data.items) return;
-      this.calendarEvents = events.data.items.reduce<CalendarEvent[]>((acc, event) => {
+      this.calendarEvents = events.data.items.reduce<CalendarEvent[]>((accumulator, event) => {
         if (event.summary && event.start?.dateTime && event.end?.dateTime) {
           const startsAt = DateTime.fromISO(event.start?.dateTime).toMillis();
           const endsAt = DateTime.fromISO(event.end?.dateTime).toMillis();
-          const params = CalendarService.parseParams(event);
-          acc.push({
+          const parameters = CalendarService.parseParams(event);
+          accumulator.push({
             summary: event.summary,
             startsAt,
             endsAt,
-            ...params,
+            ...parameters,
           });
         }
-        return acc;
+        return accumulator;
       }, []);
-    } catch (e) {
-      throw new InternalServerErrorException(e);
+    } catch (error) {
+      throw new InternalServerErrorException(error);
     }
   }
 
@@ -97,30 +97,30 @@ export class CalendarService {
       }));
   }
 
-  private static parseParams(event: calendar_v3.Schema$Event): CalendarEventParams {
-    const params: CalendarEventParams = {
+  private static parseParams(event: calendar_v3.Schema$Event): CalendarEventParameters {
+    const parameters: CalendarEventParameters = {
       notify: true,
       recording: true,
       preview: '',
     };
     const match = event.description?.match(/\[(.*?)=(.*?)]/gm);
-    if (!match) return params;
+    if (!match) return parameters;
 
-    match.forEach((param) => {
-      const [key, value] = param.slice(1, -1).split('=');
-      params[key] = value;
+    match.forEach((parameter) => {
+      const [key, value] = parameter.slice(1, -1).split('=');
+      parameters[key] = value;
 
       switch (key) {
         case 'notify':
         case 'recording':
-          params[key] = value === 'true';
+          parameters[key] = value === 'true';
           break;
         default:
-          params[key] = value;
+          parameters[key] = value;
           break;
       }
     });
 
-    return params;
+    return parameters;
   }
 }

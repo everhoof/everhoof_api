@@ -8,7 +8,7 @@ function checkFileExistsSync(filepath) {
   let flag = true;
   try {
     fs.accessSync(filepath, fs.constants.F_OK);
-  } catch (e) {
+  } catch {
     flag = false;
   }
   return flag;
@@ -20,8 +20,10 @@ let files = [
 ];
 
 if (process.env.NODE_ENV) {
-  files.push(path.join(__dirname, `.env.${process.env.NODE_ENV}`));
-  files.push(path.join(__dirname, `.env.${process.env.NODE_ENV}.local`));
+  files.push(
+    path.join(__dirname, `.env.${process.env.NODE_ENV}`),
+    path.join(__dirname, `.env.${process.env.NODE_ENV}.local`),
+  );
 }
 
 files = files.filter((file) => checkFileExistsSync(file));

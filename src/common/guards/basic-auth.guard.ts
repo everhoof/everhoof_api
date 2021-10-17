@@ -11,8 +11,8 @@ export class BasicAuthGuard implements CanActivate {
     let request = context.switchToHttp().getRequest();
 
     if (!request) {
-      const ctx = GqlExecutionContext.create(context);
-      request = ctx.getContext().req;
+      const graphqlContext = GqlExecutionContext.create(context);
+      request = graphqlContext.getContext().req;
     }
 
     const b64auth = (request.headers.authorization || '').split(' ')[1] || '';

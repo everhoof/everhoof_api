@@ -35,8 +35,8 @@ describe('App', () => {
           `,
         })
         .expect(200)
-        .expect((res) => {
-          expect(res.body.data.getHello).toBe('Hello World!');
+        .expect((response) => {
+          expect(response.body.data.getHello).toBe('Hello World!');
         });
 
       done();

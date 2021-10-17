@@ -60,8 +60,8 @@ export class StationService {
           },
         })),
       };
-    } catch (e) {
-      throw new InternalServerErrorException(e);
+    } catch (error) {
+      throw new InternalServerErrorException(error);
     }
   }
 }

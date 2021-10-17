@@ -14,7 +14,7 @@ export class SongVotesService {
     @InjectRepository(AzuraSongsRepository)
     private readonly azuraSongsRepository: AzuraSongsRepository,
     private readonly tracksService: TracksService,
-  ) { }
+  ) {}
 
   async voteForNowPlaying(voteArgs: VoteArgs, ip: string): Promise<boolean> {
     const nowPlaying = await this.tracksService.getCurrentPlaying();

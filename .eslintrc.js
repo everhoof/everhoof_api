@@ -12,6 +12,7 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:unicorn/recommended',
     'airbnb-typescript/base',
   ],
   settings: {
@@ -54,11 +55,27 @@ module.exports = {
         caseInsensitive: true,
       },
     }],
+
+    'unicorn/no-array-for-each': 'off',
+    'unicorn/no-array-reduce': 'off',
+    'unicorn/no-for-loop': 'off',
+    'unicorn/no-null': 'off',
+    'unicorn/prevent-abbreviations': [
+      'error',
+      {
+        ignore: [
+          'e2e',
+          /args/i,
+          '^(i|j)$',
+        ],
+      },
+    ],
   },
   overrides: [{
     files: ['src/database/migrations/**/*.{js,ts}'],
     rules: {
       'class-methods-use-this': 'off',
+      'unicorn/filename-case': 'off',
     },
   }],
 };

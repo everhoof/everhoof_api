@@ -57,13 +57,13 @@ export class RecordingProcessingService {
     if (!process.env.RECORD_PROCESSING_FFMPEG_PATH) throw new BadRequestException('ffmpeg path not found');
     if (!process.env.RECORD_PROCESSING_OUTPUT_PATH) throw new BadRequestException('Output path not found');
 
-    const a = this.calendarEvents.find((e) => e.date === entry.date);
+    const a = this.calendarEvents.find((event) => event.date === entry.date);
     if (!a) throw new BadRequestException('File not found in internal list');
 
-    const upl = this.uploadedRecords.find((e) => e.date === entry.date);
+    const upl = this.uploadedRecords.find((recording) => recording.date === entry.date);
     if (upl) throw new BadRequestException('File already uploaded');
 
-    const queue = this.recordEventsQueue.find((e) => e.date === entry.date);
+    const queue = this.recordEventsQueue.find((event) => event.date === entry.date);
     if (queue) throw new BadRequestException('File already in queue');
 
     if (this.recordEventsQueue.length > 0) throw new BadRequestException('Processing queue is full, please wait');
@@ -137,8 +137,8 @@ export class RecordingProcessingService {
         if (cancel) continue;
 
         if (calEntry.date === date) {
-          const a = this.recordEvents.find((e) => e.date === calEntry.date);
-          const b = this.recordEventsBroken.find((e) => e.date === calEntry.date);
+          const a = this.recordEvents.find((event) => event.date === calEntry.date);
+          const b = this.recordEventsBroken.find((event) => event.date === calEntry.date);
 
           if (!a && !b) {
             this.recordEvents.push(new RecordEvent(file, calEntry));
@@ -158,16 +158,16 @@ export class RecordingProcessingService {
     if (!process.env.RECORD_PROCESSING_AZURA_PATH) return;
     this.azuraRecordings = [];
 
-    const dirs = await readdir(process.env.RECORD_PROCESSING_AZURA_PATH, { withFileTypes: true });
+    const directories = await readdir(process.env.RECORD_PROCESSING_AZURA_PATH, { withFileTypes: true });
 
-    for (let i = 0; i < dirs.length; i++) {
-      if (!dirs[i].isDirectory()) continue;
+    for (let i = 0; i < directories.length; i++) {
+      if (!directories[i].isDirectory()) continue;
 
-      const dirs2 = await readdir(`${process.env.RECORD_PROCESSING_AZURA_PATH}/${dirs[i].name}`, {
+      const files = await readdir(`${process.env.RECORD_PROCESSING_AZURA_PATH}/${directories[i].name}`, {
         withFileTypes: true,
       });
-      dirs2.forEach((file) => {
-        if (file.isFile()) this.azuraRecordings.push(`${process.env.RECORD_PROCESSING_AZURA_PATH}/${dirs[i].name}/${file.name}`);
+      files.forEach((file) => {
+        if (file.isFile()) this.azuraRecordings.push(`${process.env.RECORD_PROCESSING_AZURA_PATH}/${directories[i].name}/${file.name}`);
       });
     }
   }
