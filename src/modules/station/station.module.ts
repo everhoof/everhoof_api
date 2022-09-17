@@ -5,5 +5,6 @@ import { StationService } from '~/modules/station/station.service';
 
 @Module({
   providers: [StationService, StationResolver],
+  exports: [StationService],
 })
 export class StationModule {}

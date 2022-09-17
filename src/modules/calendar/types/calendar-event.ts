@@ -24,9 +24,3 @@ export class CalendarEvent {
   @Field(() => Boolean)
   recording: boolean;
 }
-
-export interface CalendarEventParameters {
-  notify: boolean;
-  recording: boolean;
-  preview: string;
-}

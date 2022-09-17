@@ -64,45 +64,19 @@ type Mount {
   listeners: Listeners!
 }
 
-type Mutation {
-  processRecording(fileName: String!, date: String!, preview: String!, eventDescriptionShort: String!, eventDescriptionLong: String!): Boolean!
-  voteForNowPlaying(rating: Float!): Boolean!
-}
-
 type Playlists {
   m3u: String!
   pls: String!
 }
 
 type Query {
+  getCalendarEvents: [CalendarEvent!]!
+  getStation: Station!
   getCurrentPlaying: CurrentPlaying
   getTracksHistory: [HistoryItem!]!
   searchTracks(page: Int = 1, count: Int = 10, q: String = ""): TrackSearchResponse!
   requestTrack(songId: String!): TrackRequestResponse!
-  getCalendarEvents: [CalendarEvent!]!
-  getStation: Station!
-  getRecordings: [RecordingFile!]!
-  reloadRecordings: Boolean!
-  getPendingRecordings: [RecordEvent!]!
-  getBrokenRecordings: [RecordEvent!]!
-  getQueue: [RecordEvent!]!
   getHello: String!
-}
-
-type RecordEvent {
-  fileName: String!
-  date: String!
-  preview: String
-  eventDescriptionShort: String!
-  eventDescriptionLong: String
-}
-
-type RecordingFile {
-  name: String!
-  img: String!
-  year: String!
-  desc: String!
-  size: Float!
 }
 
 type Station {

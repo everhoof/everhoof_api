@@ -23,10 +23,10 @@ export class Mount {
   url: string;
 
   @Field(() => Number, { nullable: true })
-  bitrate: number;
+  bitrate: number | null;
 
   @Field(() => String, { nullable: true })
-  format: string;
+  format: string | null;
 
   @Field(() => Listeners)
   listeners: Listeners;
