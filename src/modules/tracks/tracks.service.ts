@@ -150,7 +150,7 @@ export class TracksService {
 
   private getArt(songId?: string | number | null): string {
     if (!songId) return '';
-    return `${process.env.RBA_API_BASE_URL}AssetProxy/songCover?songId=${songId}`;
+    return `${process.env.PUBLIC_URL}AssetProxy/songCover?songId=${songId}`;
   }
 
   @Interval(5000)
