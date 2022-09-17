@@ -6,6 +6,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ScheduleModule } from '@nestjs/schedule';
 
 import { CalendarModule } from '~/modules/calendar/calendar.module';
+import { RecordingsModule } from '~/modules/recordings/recordings.module';
 import { StationModule } from '~/modules/station/station.module';
 import { TracksModule } from '~/modules/tracks/tracks.module';
 
@@ -24,6 +25,7 @@ import { AppResolver } from './app.resolver';
     TracksModule,
     CalendarModule,
     StationModule,
+    RecordingsModule,
   ],
   providers: [AppResolver],
 })
