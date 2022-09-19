@@ -71,12 +71,21 @@ type Playlists {
 
 type Query {
   getCalendarEvents: [CalendarEvent!]!
+  getRecordings: [Recording!]!
   getStation: Station!
   getCurrentPlaying: CurrentPlaying
   getTracksHistory: [HistoryItem!]!
   searchTracks(page: Int = 1, count: Int = 10, q: String = ""): TrackSearchResponse!
   requestTrack(songId: String!): TrackRequestResponse!
   getHello: String!
+}
+
+type Recording {
+  name: String!
+  img: String!
+  year: String!
+  desc: String!
+  size: Float!
 }
 
 type Station {

@@ -82,6 +82,7 @@ export class StationService {
 
             return 0;
           })
+          .filter((mount) => /^\d+$/.test(mount.name))
           .map((mount, index) => {
             const listenersMount = listeners.mounts.find((m) => m.name.replace('/', '') === mount.name);
             const format = this.getReadableMountFormat(mount.format);
