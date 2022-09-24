@@ -184,14 +184,39 @@ export class TracksService {
 
       if (!response) return;
 
-      let id: string = response.current?.id.toString() || '';
-      let title: string = response.current?.title || '';
-      let artist: string = response.current?.artist || '';
+      let id: string = response.current?.id.toString() || response.lastMetadata?.id || '';
+      let title: string = response.current?.title || response.lastMetadata?.title || '';
+      let artist: string = response.current?.artist || response.lastMetadata?.artist || '';
       let name: string = [artist, title].filter((part) => part).join(' - ') || '';
       let duration: number = this.transformDuration(response.current?.length);
       let startsAt: number = this.transformIsoToUnix(response.current?.begin);
       let endsAt: number = startsAt + duration * 1000;
       let art: string = this.getArt(id);
+
+      if (response.liveUser) {
+        if (response.lastMetadata?.id) {
+          id = response.lastMetadata?.id;
+        }
+
+        if (response.lastMetadata?.title) {
+          const split = response.lastMetadata?.title?.split(/[–—-]/);
+          if (split[0]) {
+            if (split[1]) {
+              artist = split[0].trim();
+              title = split[1].trim();
+              name = `${artist} - ${title}`;
+            } else {
+              artist = 'Unknown';
+              title = split[0].trim();
+              name = title;
+            }
+          }
+        }
+
+        if (response.lastMetadata?.artist) {
+          artist = response.lastMetadata?.artist;
+        }
+      }
 
       currentPlaying.current = {
         id, title, artist, name, duration, startsAt, endsAt, art,
