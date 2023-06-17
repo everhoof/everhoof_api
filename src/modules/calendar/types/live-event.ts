@@ -1,33 +1,25 @@
+import {
+  BaseResponse,
+  Pagination,
+} from '~/common/types';
+
 export interface LiveEventTag {
   id: number;
   name: string;
   color: string;
 }
-export interface DiscordEvent {
-  discordEventId: number;
-  announceAt: string;
-  eventLocation: string;
-}
 
 export interface LiveEvent {
   id: number;
+  previewImage: string | null;
   description: string;
   descriptionLong: string | null;
-  dateTime: string;
-  customInfo: string | null;
+  beginsAt: string;
+  estimatedLength: string;
+  estimatedEnd: string;
   fileName: string | null;
-  previewImage: string | null;
   fileSize: number | null;
-  hidden: boolean;
-  tagIds: number[];
-  publishAt: string;
-  discordEvent: DiscordEvent | null;
   tags: LiveEventTag[];
 }
 
-export interface LiveEventsResponse {
-  page: number;
-  totalPageCount: number;
-  totalItems: number;
-  items: LiveEvent[];
-}
+export type LiveEventResponse = BaseResponse<Pagination<LiveEvent>>;

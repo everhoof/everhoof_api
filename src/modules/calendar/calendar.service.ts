@@ -10,7 +10,7 @@ import {
   CalendarEvent,
 } from '~/modules/calendar/types/calendar-event';
 import { CalendarEventDto } from '~/modules/calendar/types/calendar-event.dto';
-import { LiveEventsResponse } from '~/modules/calendar/types/live-event';
+import { LiveEventResponse } from '~/modules/calendar/types/live-event';
 
 @Injectable()
 export class CalendarService {
@@ -36,17 +36,18 @@ export class CalendarService {
 
     try {
       const from = DateTime.now().minus({ day: 1 }).toISO();
-      const events = await this.rbaClient.get('LiveEvents', {
+      const events = await this.rbaClient.get('LiveEvent/public', {
         searchParams: {
-          from,
+          after: from,
           limit: 20,
+          page: 1,
         },
-      }).json<LiveEventsResponse>();
+      }).json<LiveEventResponse>();
 
-      this.calendarEvents = events.items.reduce<CalendarEvent[]>((accumulator, event) => {
-        if (event.description && event.dateTime) {
-          const startsAt = DateTime.fromISO(event.dateTime).toMillis();
-          const endsAt = DateTime.fromISO(event.dateTime).toMillis();
+      this.calendarEvents = events.value?.items.reduce<CalendarEvent[]>((accumulator, event) => {
+        if (event.description && event.beginsAt) {
+          const startsAt = DateTime.fromISO(event.beginsAt).toMillis();
+          const endsAt = DateTime.fromISO(event.estimatedEnd).toMillis();
 
           accumulator.push({
             summary: event.description,

@@ -1,29 +1,25 @@
-export interface CurrentPlayingLastMetadata {
-  id: string | null;
-  playlistId: string | null;
+import { BaseResponse } from '~/common/types';
+
+export interface CurrentPlayingRawMetadata {
   artist: string | null;
   title: string | null;
 }
 
-export interface CurrentPlayingPlaylist {
-  id: number;
-  name: string | null;
-}
-
 export interface CurrentPlayingTrack {
-  id: number;
-  length: string | null;
+  id: number | null;
+  audioLength: string | null;
   begin: string | null;
   end: string | null;
   artist: string | null;
   title: string | null;
   album: string | null;
-  playlist: CurrentPlayingPlaylist | null;
 }
 
 export interface NowPlaying {
-  lastMetadata: CurrentPlayingLastMetadata | null;
+  rawMetadata: CurrentPlayingRawMetadata | null;
   liveUser: string | null;
-  current: CurrentPlayingTrack | null;
+  now: CurrentPlayingTrack | null;
   next: CurrentPlayingTrack | null;
 }
+
+export type NowPlayingResponse = BaseResponse<NowPlaying>;

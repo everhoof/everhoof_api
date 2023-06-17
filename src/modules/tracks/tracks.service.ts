@@ -13,6 +13,7 @@ import {
   Duration,
 } from 'luxon';
 
+import { BaseResponse } from '~/common/types';
 import { StationService } from '~/modules/station/station.service';
 import { TrackRequestArgs } from '~/modules/tracks/args/track-request.args';
 import { TrackSearchArgs } from '~/modules/tracks/args/track-search.args';
@@ -20,11 +21,8 @@ import { TracksGateway } from '~/modules/tracks/tracks.gateway';
 import { CurrentPlaying } from '~/modules/tracks/types/current-playing';
 import { GatewayTrack } from '~/modules/tracks/types/gateway';
 import { HistoryItem } from '~/modules/tracks/types/history';
-import { NowPlaying } from '~/modules/tracks/types/nowplaying';
-import {
-  PlayoutHistory,
-  QueueOrigin,
-} from '~/modules/tracks/types/playout-history';
+import { NowPlayingResponse } from '~/modules/tracks/types/nowplaying';
+import { HistoryResponse } from '~/modules/tracks/types/playout-history';
 import { SongsResponse } from '~/modules/tracks/types/songs';
 import { TrackRequestResponse } from '~/modules/tracks/types/track-request-response';
 import { TrackSearchResponse } from '~/modules/tracks/types/track-search-response';
@@ -32,8 +30,6 @@ import { TrackSearchResponse } from '~/modules/tracks/types/track-search-respons
 @Injectable()
 export class TracksService {
   private readonly rbaClient: Got;
-
-  private readonly rbaPrivateClient: Got;
 
   private currentPlaying?: CurrentPlaying;
 
@@ -47,13 +43,6 @@ export class TracksService {
     this.rbaClient = got.extend({
       responseType: 'json',
       prefixUrl: `${process.env.RBA_API_BASE_URL}`,
-    });
-    this.rbaPrivateClient = got.extend({
-      responseType: 'json',
-      prefixUrl: `${process.env.RBA_API_BASE_URL}`,
-      headers: {
-        CoreApiKey: `${process.env.RBA_API_KEY}`,
-      },
     });
   }
 
@@ -69,7 +58,7 @@ export class TracksService {
   }
 
   async searchTracks(trackSearchArgs: TrackSearchArgs): Promise<TrackSearchResponse> {
-    const response = await this.rbaClient('Song', {
+    const response = await this.rbaClient.post('ListenerSongRequest/search-song', {
       searchParams: {
         page: trackSearchArgs.page,
         limit: trackSearchArgs.count,
@@ -86,10 +75,10 @@ export class TracksService {
     }
 
     return {
-      page: response.page,
+      page: response.value.pageNumber,
       count: trackSearchArgs.count,
-      total: response.totalItems,
-      items: response.items.map((track) => ({
+      total: response.value.totalCount,
+      items: response.value.items.map((track) => ({
         requestId: `${track.id}`,
         track: {
           id: `${track.id}`,
@@ -97,7 +86,7 @@ export class TracksService {
           artist: track.artist ?? '',
           album: track.album ?? '',
           art: this.getArt(track.id),
-          lyrics: track.lyrics ?? '',
+          lyrics: '',
           text: [track.artist, track.title].filter((part) => part).join(' - '),
         },
       })),
@@ -111,23 +100,30 @@ export class TracksService {
     }
 
     try {
-      const response = await this.rbaClient.post('Queue/addRequest', {
+      const response = await this.rbaClient.post('ListenerSongRequest/add-request', {
         searchParams: {
           songId: args.songId,
         },
         headers,
-      }).text();
+      }).json<BaseResponse<string>>();
+
+      if (response.succeeded) {
+        return {
+          success: response.succeeded,
+          message: response.value || 'Трек успешно добавлен в очередь.',
+        };
+      }
 
       return {
-        success: true,
-        message: response,
+        success: response.succeeded,
+        message: response.errors.join('\n'),
       };
     } catch (error) {
       if (error instanceof HTTPError) {
-        const response = error.response.rawBody.toString();
+        const response = JSON.parse(error.response.rawBody.toString());
         return {
           success: false,
-          message: response,
+          message: response.errors.join('\n'),
         };
       }
     }
@@ -150,7 +146,7 @@ export class TracksService {
 
   private getArt(songId?: string | number | null): string {
     if (!songId) return '';
-    return `${process.env.PUBLIC_URL}AssetProxy/songCover?songId=${songId}`;
+    return `${process.env.PUBLIC_URL}SongAsset/cover?songId=${songId}`;
   }
 
   @Interval(5000)
@@ -159,47 +155,42 @@ export class TracksService {
 
     try {
       const station = await this.stationService.getStation();
-      const response: NowPlaying | null = await this.rbaClient('Statistics/currentPlaying').json();
-      const history: PlayoutHistory | null = await this.rbaPrivateClient('Statistics/playoutHistory?limit=15').json();
+      const response: NowPlayingResponse = await this.rbaClient('PublicInfo/now-playing').json();
+      const history: HistoryResponse = await this.rbaClient('PublicInfo/history?itemCount=15').json();
 
-      this.tracksHistory = history?.items
-        .filter((item) => item.origin !== QueueOrigin.AutoDJ_jingle)
-        .map((item) => ({
-          id: item.id,
-          playedAt: this.transformIsoToUnix(item.begin),
-          duration: this.transformDuration(item.song.length),
+      this.tracksHistory = history.value
+        .map((item, i) => ({
+          id: i,
+          playedAt: this.transformIsoToUnix(item.playingEnded),
+          duration: 0,
           playlist: 'unknown',
           streamer: 'unknown',
           isRequest: false,
           track: {
-            id: item.song.id.toString(),
-            text: [item.song.artist, item.song.title].filter((part) => part).join(' - '),
-            artist: item.song.artist ?? '',
-            title: item.song.title ?? '',
-            album: item.song.album ?? '',
+            id: i.toString(),
+            text: [item.artist, item.title].filter((part) => part).join(' - '),
+            artist: item.artist ?? '',
+            title: item.title ?? '',
+            album: '',
             lyrics: '',
             art: '',
           },
         })).slice(0, 10) ?? [];
 
-      if (!response) return;
+      if (!response.value) return;
 
-      let id: string = response.current?.id.toString() || response.lastMetadata?.id || '';
-      let title: string = response.current?.title || response.lastMetadata?.title || '';
-      let artist: string = response.current?.artist || response.lastMetadata?.artist || '';
+      let id: string = response.value.now?.id?.toString() || '';
+      let title: string = response.value.now?.title || response.value.rawMetadata?.title || '';
+      let artist: string = response.value.now?.artist || response.value.rawMetadata?.artist || '';
       let name: string = [artist, title].filter((part) => part).join(' - ') || '';
-      let duration: number = this.transformDuration(response.current?.length);
-      let startsAt: number = this.transformIsoToUnix(response.current?.begin);
+      let duration: number = this.transformDuration(response.value.now?.audioLength);
+      let startsAt: number = this.transformIsoToUnix(response.value.now?.begin);
       let endsAt: number = startsAt + duration * 1000;
       let art: string = this.getArt(id);
 
-      if (response.liveUser) {
-        if (response.lastMetadata?.id) {
-          id = response.lastMetadata?.id;
-        }
-
-        if (response.lastMetadata?.title) {
-          const split = response.lastMetadata?.title?.split(/[–—-]/);
+      if (response.value.liveUser) {
+        if (response.value.rawMetadata?.title) {
+          const split = response.value.rawMetadata?.title?.split(/[–—-]/);
           if (split[0]) {
             if (split[1]) {
               artist = split[0].trim();
@@ -213,8 +204,8 @@ export class TracksService {
           }
         }
 
-        if (response.lastMetadata?.artist) {
-          artist = response.lastMetadata?.artist;
+        if (response.value.rawMetadata?.artist) {
+          artist = response.value.rawMetadata?.artist;
         }
       }
 
@@ -222,12 +213,12 @@ export class TracksService {
         id, title, artist, name, duration, startsAt, endsAt, art,
       };
 
-      id = response.next?.id.toString() || '';
-      title = response.next?.title || '';
-      artist = response.next?.artist || '';
+      id = response.value.next?.id?.toString() || '';
+      title = response.value.next?.title || '';
+      artist = response.value.next?.artist || '';
       name = [artist, title].filter((part) => part).join(' - ') || '';
-      duration = this.transformDuration(response.next?.length);
-      startsAt = this.transformIsoToUnix(response.next?.begin);
+      duration = this.transformDuration(response.value.next?.audioLength);
+      startsAt = this.transformIsoToUnix(response.value.next?.begin);
       endsAt = startsAt + duration * 1000;
       art = this.getArt(id);
 
@@ -249,8 +240,8 @@ export class TracksService {
       };
 
       currentPlaying.live = {
-        isLive: !!response.liveUser,
-        streamerName: response.liveUser ?? '',
+        isLive: !!response.value.liveUser,
+        streamerName: response.value.liveUser ?? '',
         broadcastStart: 0,
       };
 

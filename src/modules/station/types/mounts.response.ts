@@ -1,14 +1,10 @@
-export enum StreamFormat {
-  mp3 = 0,
-  oggVorbis,
-  oggOpus,
-  aac,
-  flac,
-}
+import { BaseResponse } from '~/common/types';
 
 export interface MountsResponseItem {
-  id: number;
-  name: string;
+  displayName: string;
+  path: string;
   bitrate: number;
-  format: StreamFormat;
+  format: string;
 }
+
+export type MountsResponse = BaseResponse<MountsResponseItem[]>;
