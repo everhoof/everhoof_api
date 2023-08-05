@@ -6,6 +6,7 @@ import {
 } from '@nestjs/graphql';
 
 import { Ip } from '~/common/decorators/ip.decorator';
+import { UserAgent } from '~/common/decorators/user-agent.decorator';
 import { GraphqlExceptionFilter } from '~/common/filters/graphql-exception.filter';
 import { TrackRequestArgs } from '~/modules/tracks/args/track-request.args';
 import { TrackSearchArgs } from '~/modules/tracks/args/track-search.args';
@@ -36,7 +37,11 @@ export class TracksResolver {
   }
 
   @Query(() => TrackRequestResponse)
-  requestTrack(@Args() args: TrackRequestArgs, @Ip() ip?: string): Promise<TrackRequestResponse> {
-    return this.tracksService.requestTrack(args, ip);
+  requestTrack(
+    @Args() args: TrackRequestArgs,
+      @UserAgent() userAgent?: string,
+      @Ip() ip?: string,
+  ): Promise<TrackRequestResponse> {
+    return this.tracksService.requestTrack(args, userAgent, ip);
   }
 }

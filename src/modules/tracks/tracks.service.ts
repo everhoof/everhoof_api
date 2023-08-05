@@ -93,8 +93,13 @@ export class TracksService {
     };
   }
 
-  async requestTrack(args: TrackRequestArgs, ip?: string): Promise<TrackRequestResponse> {
+  async requestTrack(args: TrackRequestArgs, userAgent?: string, ip?: string): Promise<TrackRequestResponse> {
     const headers = {};
+
+    if (userAgent) {
+      headers['User-Agent'] = userAgent;
+    }
+
     if (ip) {
       headers['X-Forwarded-For'] = ip;
     }
@@ -110,7 +115,7 @@ export class TracksService {
       if (response.succeeded) {
         return {
           success: response.succeeded,
-          message: response.value || 'Трек успешно добавлен в очередь.',
+          message: `Трек успешно добавлен в очередь. Он прозвучит примерно через ${response.value} минут.`,
         };
       }
 
