@@ -3,10 +3,10 @@ name: cd
 on:
   push:
     branches:
-      - master
+      - develop
 
 jobs:
-  production-deploy:
+  staging-deploy:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -18,7 +18,7 @@ jobs:
       - name: Set NODE_ENV
         run: NODE_ENV=$APP_NODE_ENV
         env:
-          APP_NODE_ENV: ${{ secrets.PRODUCTION_NODE_ENV }}
+          APP_NODE_ENV: ${{ secrets.STAGING_NODE_ENV }}
 
       - name: Checkout 🛎
         uses: actions/checkout@v2
@@ -56,23 +56,23 @@ jobs:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/production.key
-          chmod 600 ~/.ssh/production.key
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
           cat >>~/.ssh/config <<END
-          Host production
+          Host staging
             HostName $SSH_HOST
             Port $SSH_PORT
             User $SSH_USER
-            IdentityFile ~/.ssh/production.key
+            IdentityFile ~/.ssh/staging.key
             StrictHostKeyChecking no
             SendEnv APP_DIR
             SendEnv APP_NODE_ENV
           END
         env:
-          SSH_USER: ${{ secrets.PRODUCTION_SSH_USER }}
-          SSH_KEY: ${{ secrets.PRODUCTION_SSH_KEY }}
-          SSH_HOST: ${{ secrets.PRODUCTION_SSH_HOST }}
-          SSH_PORT: ${{ secrets.PRODUCTION_SSH_PORT }}
+          SSH_USER: ${{ secrets.STAGING_SSH_USER }}
+          SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+          SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
+          SSH_PORT: ${{ secrets.STAGING_SSH_PORT }}
 
       - name: Tar files
         run: >
@@ -91,15 +91,15 @@ jobs:
       - name: Copy dist files
         run: |
           echo -n "$UDP_MESSAGE" >/dev/udp/$SSH_HOST/62544
-          ssh production 'mkdir -p $APP_DIR'
-          scp -r artifacts.tgz deploy.sh production:$APP_DIR
+          ssh staging 'mkdir -p $APP_DIR'
+          scp -r artifacts.tgz deploy.sh staging:$APP_DIR
         env:
-          APP_DIR: ${{ secrets.PRODUCTION_APP_DIR }}
-          SSH_HOST: ${{ secrets.PRODUCTION_SSH_HOST }}
-          UDP_MESSAGE: ${{ secrets.PRODUCTION_UDP_MESSAGE }}
+          APP_DIR: ${{ secrets.STAGING_APP_DIR }}
+          SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
+          UDP_MESSAGE: ${{ secrets.STAGING_UDP_MESSAGE }}
 
       - name: Run deploy script
-        run: ssh production 'cd $APP_DIR && export NODE_ENV=$APP_NODE_ENV && bash deploy.sh'
+        run: ssh staging 'cd $APP_DIR && export NODE_ENV=$APP_NODE_ENV && bash deploy.sh'
         env:
-          APP_DIR: ${{ secrets.PRODUCTION_APP_DIR }}
-          APP_NODE_ENV: ${{ secrets.PRODUCTION_NODE_ENV }}
+          APP_DIR: ${{ secrets.STAGING_APP_DIR }}
+          APP_NODE_ENV: ${{ secrets.STAGING_NODE_ENV }}
